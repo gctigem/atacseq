@@ -1,0 +1,9 @@
+file:
+ /home/tigem/g.martone/projects/atacseq/reads.yml
+
+reads:
+- - BCL6B
+  - ['gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/BCL6B_rep1_S39_R1_001.fastq.gz', 'gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/BCL6B_rep1_S39_R2_001.fastq.gz', 'gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/BCL6B_rep2_S43_R1_001.fastq.gz', 'gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/BCL6B_rep2_S43_R2_001.fastq.gz']
+
+outdir:
+ /home/tigem/g.martone/results/atacseq

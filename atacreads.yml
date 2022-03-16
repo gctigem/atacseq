@@ -1,0 +1,15 @@
+file:
+- /home/tigem/g.martone/projects/atacseq/atacreads.yml
+
+reads:
+- - BCL6B
+  - ["gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/BCL6B_rep1_S39_R1_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/BCL6B_rep1_S39_R2_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/BCL6B_rep2_S43_R1_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/BCL6B_rep2_S43_R2_001.fastq.gz"]
+- - ESR1
+  - ["gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/ESR1_rep1_S69_R1_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/ESR1_rep1_S69_R2_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/ESR1_rep2_S70_R1_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/ESR1_rep2_S70_R2_001.fastq.gz"]
+- - ESRRB
+  - ["gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/ESRRB_rep1_S12_R1_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/ESRRB_rep1_S12_R2_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/ESRRB_rep2_S13_R1_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/ESRRB_rep2_S13_R2_001.fastq.gz"]
+- - ESRRG
+  - ["gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/ESRRG_rep1_S22_R1_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200422_A00560_0105_AHJMKVDRXX/Reads/ESRRG_rep1_S22_R2_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/ESRRG_rep2_S24_R1_001.fastq.gz", "gs://tigem-gcacchiarelli-01/Runs/Slovin/200429_A00560_0109_AHJVHWDRXX/Reads/ESRRG_rep2_S24_R2_001.fastq.gz"]
+
+outdir:
+ /home/tigem/g.martone/results/atacseq
