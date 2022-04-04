@@ -14,7 +14,7 @@ process create_tss {
     }
     
     output:
-    path("*.tss.bed"), emit: tssbed
+    path file("*.tss.bed"), emit: tssbed
     
     script:
     """
