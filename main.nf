@@ -52,7 +52,7 @@ workflow {
      summary_plot(peak_calling.out.narrowPeak)
      idr(peak_calling.out.narrowPeak)
      input_ataqv = peak_calling.out.narrowPeak.join(samstat_tf.out.tf_sorted_bam)
-     ataqv(input_ataqv)
+     ataqv(input_ataqv,create_tss.out.tssbed)
      input_bigwig = samstat_tf.out.tf_sorted_flagstat.join(samstat_tf.out.tf_sorted_bam)
      bigwig(input_bigwig)
      idr_peaks(idr.out.filtered_bed.collect())
