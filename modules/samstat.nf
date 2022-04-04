@@ -31,6 +31,8 @@ process samstat {
         ${sample_id}_rep1.sorted.bam.idxstats
     samtools stats ${sample_id}_rep1.sorted.bam > \
         ${sample_id}_rep1.sorted.bam.stats
+        
+    rm ${bam[0]}
 
     samtools sort ${bam[1]} -O bam -o ${sample_id}_rep2.sorted.bam
     samtools flagstat ${sample_id}_rep2.sorted.bam > \
@@ -39,5 +41,7 @@ process samstat {
         ${sample_id}_rep2.sorted.bam.idxstats
     samtools stats ${sample_id}_rep2.sorted.bam > \
         ${sample_id}_rep2.sorted.bam.stats
+        
+    rm ${bam[1]}
     """
 }
