@@ -4,6 +4,7 @@ nextflow.enable.dsl=2
 include { fastqc } from './modules/fastqc'
 include { trimming } from './modules/trimming'
 include { create_bed } from './modules/create_bed'
+include { create_tss } from './modules/create_tss'
 include { alignment } from './modules/alignment'
 include { samstat } from './modules/samstat'
 include { lc_extrap } from './modules/lc_extrap'
@@ -34,6 +35,7 @@ workflow {
      fastqc(reads)
      trimming(reads)
      create_bed()
+     create_tss()
      alignment(trimming.out.samples_trimmed)
      samstat(alignment.out.alignment_bam)
      lc_extrap(samstat.out.sorted_bam)
