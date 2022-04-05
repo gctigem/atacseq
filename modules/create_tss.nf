@@ -17,7 +17,7 @@ process create_tss {
     
     script:
     """
-    gtf2bed $params.gtf > ${params.gtf.baseName}.bed
-    cat ${params.gtf.baseName}.bed | awk -v FS='\t' -v OFS='\t' '{ if(\$6=="+") \$3=\$2+1; else \$2=\$3-1; print \$1, \$2, \$3, \$4, \$5, \$6;}' > ${params.gtf.baseName}.tss.bed
+    gtf2bed $params.gtf > ${params.gtf.getBaseName}.bed
+    cat ${params.gtf.getBaseName}.bed | awk -v FS='\t' -v OFS='\t' '{ if(\$6=="+") \$3=\$2+1; else \$2=\$3-1; print \$1, \$2, \$3, \$4, \$5, \$6;}' > ${params.gtf.getBaseName}.tss.bed
     """    
 }
