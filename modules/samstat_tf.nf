@@ -37,7 +37,7 @@ process samstat_tf {
     samtools idxstats ${sample_id}_rep1.third_filtering.sorted.bam > ${sample_id}_rep1.third_filtering.sorted.bam.idxstats
     samtools stats ${sample_id}_rep1.third_filtering.sorted.bam > ${sample_id}_rep1.third_filtering.sorted.bam.stats
     
-    ${sf_sorted_bam[0]} 
+    rm ${sf_sorted_bam[0]} 
 
     samtools sort -n ${sf_sorted_bam[1]} -o ${sample_id}_rep2.sortedbyname.bam
     
