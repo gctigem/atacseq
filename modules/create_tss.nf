@@ -1,6 +1,5 @@
 /* 
- ##### Create Bed file  #####
- Prepare genome intervals for filtering
+ ##### Create TSS file  #####
 */
 
 process create_tss {
