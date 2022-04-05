@@ -18,6 +18,6 @@ process create_tss {
     script:
     """
     gtf2bed $params.gtf > genes.bed
-    cat genes.bed | awk -v FS='\t' -v OFS='\t' '{ if(\$6=="+") \$3=\$2+1; else \$2=\$3-1; print \$1, \$2, \$3, \$4, \$5, \$6;}' > genes.tss.bed
+    cat genes.bed | awk -v FS='\t' -v OFS='\t' '{ if(\$6=="+") \$3=\$2+1; else \$2=\$3-1; print \$1, \$2, \$3, \$4, \$5, \$6;}'| awk '$1 ~ "^chr"' > genes.tss.bed
     """    
 }
