@@ -16,7 +16,7 @@ process ataqv {
 
     input:
     tuple val(sample_id), path(narrowPeak), path(tf_sorted_bam)
-    input path(tssbed)
+    path(tssbed)
 
     output:
     tuple val(sample_id), path("*.json"), emit: json
