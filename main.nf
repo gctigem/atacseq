@@ -33,7 +33,7 @@ reads = Channel.from( params.reads )
 workflow {
 
      echo(reads)
-     //fastqc(reads)
+     fastqc(reads)
      //trimming(reads)
      //create_bed()
      //create_tss()
