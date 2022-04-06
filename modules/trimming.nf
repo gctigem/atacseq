@@ -5,6 +5,8 @@
 
 
 process trimming {
+    container = 'docker://dceoy/trim_galore:latest'
+    echo true
     tag 'Trim Galore'
     label 'trimming'
     publishDir "$params.outdir" , mode: 'copy',
