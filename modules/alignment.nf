@@ -4,7 +4,7 @@
 */
 
 process alignment {
-    container 'docker://dcoey/bwa:latest'
+    container 'docker://dceoy/bwa:latest'
     echo true
     label 'alignment'
     tag 'BWA'
