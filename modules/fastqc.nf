@@ -3,6 +3,7 @@
 */
 
 process fastqc {
+    container 'docker://staphb/fastqc:0.11.9'
     echo true
     label 'fastqc'
     tag 'FASTQC'
