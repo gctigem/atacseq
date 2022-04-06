@@ -38,7 +38,7 @@ workflow {
      create_bed()
      create_tss()
      alignment(trimming.out.samples_trimmed)
-     //samstat(alignment.out.alignment_bam)
+     samstat(alignment.out.alignment_bam)
      //lc_extrap(samstat.out.sorted_bam)
      //remove_dups(samstat.out.sorted_bam)
      //samstat_uniq(remove_dups.out.uniq_bam)
