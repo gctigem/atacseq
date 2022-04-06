@@ -22,6 +22,9 @@ process alignment {
 
     script:
     """
+    cp $params.bwaindex .
+    bwa index $params.bwaindex
+    
     bwa mem -M $params.bwaindex ${reads[0]} ${reads[1]} | samtools view -b -h -F 0x0100 -o "${sample_id}_rep1_aligned_reads.bam"
 
     bwa mem -M $params.bwaindex ${reads[2]} ${reads[3]} | samtools view -b -h -F 0x0100 -o "${sample_id}_rep2_aligned_reads.bam"
