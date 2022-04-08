@@ -3,7 +3,7 @@
 */
 
 process samstat_uniq {
-    container 'docker://giusmar/atacseq:0.0.4'
+    container 'docker://giusmar/atacseq:0.0.3'
     echo true
     label 'samstat_uniq'
     tag 'samtools'
