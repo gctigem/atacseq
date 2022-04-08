@@ -3,7 +3,7 @@
 */
 
 process remove_dups {
-    container 'docker://giusmar/atacseq:0.0.4'
+    container 'docker://circleci/picard:latest'
     echo true
     label 'remove_dups'
     tag 'Picard'
