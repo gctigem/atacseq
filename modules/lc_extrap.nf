@@ -21,7 +21,7 @@ process lc_extrap {
 
     script:
     """
-    $PWD/preseq-3.1.2/preseq lc_extrap -output ${sample_id}_rep1.ccurve.txt -verbose -bam -pe ${bam[0]}
-    $PWD/preseq-3.1.2/preseq lc_extrap -output ${sample_id}_rep2.ccurve.txt -verbose -bam -pe ${bam[1]}
+    preseq lc_extrap -output ${sample_id}_rep1.ccurve.txt -verbose -bam -pe ${bam[0]}
+    preseq lc_extrap -output ${sample_id}_rep2.ccurve.txt -verbose -bam -pe ${bam[1]}
     """
 }
