@@ -3,6 +3,7 @@
 */
 
 process peak_calling {
+    container 'docker://giusmar/atacseq:0.0.6'
     echo true
     label 'peak_calling'
     tag 'Python'

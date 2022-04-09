@@ -3,6 +3,7 @@
 */
 
 process bamTObedpe {
+    container 'docker://giusmar/atacseq:0.0.6'
     echo true
     label 'bamTObedpe'
     tag 'samtools'

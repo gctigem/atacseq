@@ -4,6 +4,7 @@
 */
 
 process j_coefficient {
+    container 'docker://giusmar/atacseq:0.0.6'
     echo true
     label 'j_coefficient'
     tag 'bedtools'
