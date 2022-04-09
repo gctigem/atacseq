@@ -23,11 +23,11 @@ process remove_dups {
 
     script:
     """
-    PicardCommandLine MarkDuplicates INPUT=${bam[0]} OUTPUT=${sample_id}_rep1.sorted.uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_rep1.MarkDuplicates.metrics.txt VALIDATION_STRINGENCY=LENIENT
+    /bin/PicardCommandLine MarkDuplicates INPUT=${bam[0]} OUTPUT=${sample_id}_rep1.sorted.uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_rep1.MarkDuplicates.metrics.txt VALIDATION_STRINGENCY=LENIENT
     
     rm ${bam[0]}
     
-    PicardCommandLine MarkDuplicates INPUT=${bam[1]} OUTPUT=${sample_id}_rep2.sorted.uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_rep2.MarkDuplicates.metrics.txt VALIDATION_STRINGENCY=LENIENT
+    /bin/PicardCommandLine MarkDuplicates INPUT=${bam[1]} OUTPUT=${sample_id}_rep2.sorted.uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_rep2.MarkDuplicates.metrics.txt VALIDATION_STRINGENCY=LENIENT
     
     rm ${bam[1]}
     """
