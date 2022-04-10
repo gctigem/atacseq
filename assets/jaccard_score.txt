@@ -1,0 +1,11 @@
+#id: 'jaccard_score'
+#section_name: 'jaccard_score'
+#description: "jaccard_score"
+#plot_type: 'bargraph'
+#anchor: 'jaccard_score'
+#pconfig:
+#    title: 'jaccard score'
+#    ylab: 'jaccard score'
+#    ymax: 1
+#    ymin: 0
+#    tt_decimals: 2

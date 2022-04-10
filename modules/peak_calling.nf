@@ -27,11 +27,11 @@ process peak_calling {
     READS_IN_PEAKS_rep2 = "bedtools intersect -a ${sample_id}_rep2.third_filtering.sorted.bam -b ${sample_id}_rep2_peaks.narrowPeak -bed -c -f 0.20 | awk -F '\t' '{sum += \$NF} END {print sum}'"
     """
     macs2 callpeak -t ${fragment_bed[0]} -n ${sample_id}_rep1 -f BEDPE
-    cat ${sample_id}_rep1_peaks.narrowPeak | wc -l | awk -v OFS='\t' -v name="${sample_id}" '{ print name, \$1 }' | cat $baseDir/$params.mlib_peak_count_header - > ${sample_id}_rep1_peaks.count_mqc.tsv
-    grep 'mapped (' ${tf_sorted_flagstat[0]} | awk -v a="${READS_IN_PEAKS_rep1}" -v OFS='\t' -v name="${sample_id}" '{print name, a/\$1}' | cat $baseDir/$params.mlib_frip_score_header - > ${sample_id}_rep1_peaks.FRiP_mqc.tsv
+    cat ${sample_id}_rep1_peaks.narrowPeak | wc -l | awk -v OFS='\t' -v name="${sample_id}" '{ print name, \$1 }' | cat $baseDir/assets/$params.mlib_peak_count_header - > ${sample_id}_rep1_peaks.count_mqc.tsv
+    grep 'mapped (' ${tf_sorted_flagstat[0]} | awk -v a="${READS_IN_PEAKS_rep1}" -v OFS='\t' -v name="${sample_id}" '{print name, a/\$1}' | cat $baseDir/assets/$params.mlib_frip_score_header - > ${sample_id}_rep1_peaks.FRiP_mqc.tsv
 
     macs2 callpeak -t ${fragment_bed[1]} -n ${sample_id}_rep2 -f BEDPE
-    cat ${sample_id}_rep2_peaks.narrowPeak | wc -l | awk -v OFS='\t' -v name="${sample_id}" '{ print name, \$1 }' | cat $baseDir/$params.mlib_peak_count_header - > ${sample_id}_rep2_peaks.count_mqc.tsv
-    grep 'mapped (' ${tf_sorted_flagstat[1]} | awk -v a="${READS_IN_PEAKS_rep2}" -v OFS='\t' -v name="${sample_id}" '{print name, a/\$1}' | cat $baseDir/$params.mlib_frip_score_header - > ${sample_id}_rep2_peaks.FRiP_mqc.tsv
+    cat ${sample_id}_rep2_peaks.narrowPeak | wc -l | awk -v OFS='\t' -v name="${sample_id}" '{ print name, \$1 }' | cat $baseDir/assets/$params.mlib_peak_count_header - > ${sample_id}_rep2_peaks.count_mqc.tsv
+    grep 'mapped (' ${tf_sorted_flagstat[1]} | awk -v a="${READS_IN_PEAKS_rep2}" -v OFS='\t' -v name="${sample_id}" '{print name, a/\$1}' | cat $baseDir/assets/$params.mlib_frip_score_header - > ${sample_id}_rep2_peaks.FRiP_mqc.tsv
     """
 }

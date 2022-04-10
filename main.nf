@@ -50,7 +50,7 @@ workflow {
      input_peakcalling = bamTObedpe.out.fragment_bed.join(samstat_tf.out.tf_sorted_bam.join(samstat_tf.out.tf_sorted_flagstat))
      peak_calling(input_peakcalling)
      j_coefficient(peak_calling.out.narrowPeak)
-     //summary_plot(peak_calling.out.narrowPeak)
+     summary_plot(peak_calling.out.narrowPeak)
      //idr(peak_calling.out.narrowPeak)
      //input_ataqv = peak_calling.out.narrowPeak.join(samstat_tf.out.tf_sorted_bam)
      //ataqv(input_ataqv,create_tss.out.tssbed)
