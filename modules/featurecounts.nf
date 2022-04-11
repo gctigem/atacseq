@@ -4,6 +4,7 @@
 */
 
 process featurecounts {
+    container 'docker://giusmar/atacseq:0.0.13'
     echo true
     label 'featurecounts'
     tag 'featurecounts'

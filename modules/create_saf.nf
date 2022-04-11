@@ -4,6 +4,7 @@
 */
 
 process create_saf {
+    container 'docker://giusmar/atacseq:0.0.12'
     echo true
     label 'create_saf'
     tag 'bash'

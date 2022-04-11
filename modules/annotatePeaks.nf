@@ -4,6 +4,7 @@
 */
 
 process annotatePeaks {
+    container 'docker://gtgraham/clear-homer:v1.0'
     echo true
     label 'annotatePeaks'
     tag 'Homer'
@@ -21,7 +22,7 @@ process annotatePeaks {
 
     script:
     """
-    annotatePeaks.pl ${homer_bed} $params.fasta -gid -gtf $params.gtf > annotatePeaks_homer_names_160_IDR_peaks.txt
+    annotatePeaks ${homer_bed} $params.fasta -gid -gtf $params.gtf > annotatePeaks_homer_names_160_IDR_peaks.txt
     """
 
 }
