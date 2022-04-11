@@ -3,7 +3,7 @@
 */
 
 process summary_plot {
-    container 'docker://giusmar/r-code:0.0.1'
+    container 'docker://giusmar/r-code:0.0.2'
     echo true
     label 'summary_plot'
     tag 'R'
