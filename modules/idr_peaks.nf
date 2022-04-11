@@ -3,6 +3,7 @@
 */
 
 process idr_peaks {
+    container 'docker://giusmar/atacseq:0.0.12'
     echo true
     label 'idr_peaks'
     tag 'bedtools'
