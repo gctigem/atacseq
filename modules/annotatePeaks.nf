@@ -22,7 +22,7 @@ process annotatePeaks {
 
     script:
     """
-    annotatePeaks ${homer_bed} $params.fasta -gid -gtf $params.gtf > annotatePeaks_homer_names_160_IDR_peaks.txt
+    annotatePeaks.pl ${homer_bed} $params.fasta -gid -gtf $params.gtf > annotatePeaks_homer_names_160_IDR_peaks.txt
     """
 
 }
