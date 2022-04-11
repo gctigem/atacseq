@@ -57,8 +57,8 @@ workflow {
      input_bigwig = samstat_tf.out.tf_sorted_flagstat.join(samstat_tf.out.tf_sorted_bam)
      bigwig(input_bigwig)
      idr_peaks(idr.out.filtered_bed.collect())
-     //annotatePeaks(idr_peaks.out.homer_bed)
-     //create_saf(idr_peaks.out.homer_bed)  
-     //featurecounts(create_saf.out.saf,samstat_tf.out.bam.collect())
+     annotatePeaks(idr_peaks.out.homer_bed)
+     create_saf(idr_peaks.out.homer_bed)  
+     featurecounts(create_saf.out.saf,samstat_tf.out.bam.collect())
 
 }
