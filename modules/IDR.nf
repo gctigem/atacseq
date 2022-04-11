@@ -3,6 +3,7 @@
 */
 
 process idr {
+    container 'docker://giusmar/atacseq:0.0.9'
     echo true
     label 'idr'
     tag 'IDR'
