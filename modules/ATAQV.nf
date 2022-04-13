@@ -3,6 +3,7 @@
 */
 
 process ataqv {
+    container 'docker://giusmar/atacseq:0.0.10'
     echo true
     label 'ataqv'
     tag 'ataqv'
@@ -33,6 +34,5 @@ process ataqv {
     ataqv --peak-file ${narrowPeak[1]} --tss-file ${tssbed} --metrics-file ${sample_id}_rep2.ataqv.json --name ${sample_id}_rep2  --ignore-read-groups --autosomal-reference-file $baseDir/assets/$params.autosomesbed MT ${tf_sorted_bam[1]} > ${sample_id}_rep2.ataqv.out
 
     mkarv ${sample_id}_qc.html ${sample_id}_rep1.ataqv.json ${sample_id}_rep2.ataqv.json
-
     """
 }

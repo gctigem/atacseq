@@ -4,6 +4,7 @@
 */
 
 process bigwig {
+    container 'docker://giusmar/atacseq:0.0.12'
     echo true
     label 'bigwig'
     tag 'bedtools'

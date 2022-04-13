@@ -3,6 +3,7 @@
 */
 
 process samstat_sf {
+    container 'docker://giusmar/atacseq:0.0.6'
     echo true
     label 'samstat_sf'
     tag 'samtools'

@@ -3,6 +3,7 @@
 */
 
 process lc_extrap {
+    container 'docker://clinicalgenomics/preseq:3.1.2'
     echo true
     label 'lc_extrap'
     tag 'Preseq'

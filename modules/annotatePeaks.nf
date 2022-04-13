@@ -4,6 +4,7 @@
 */
 
 process annotatePeaks {
+    container 'docker://gtgraham/clear-homer:v1.0'
     echo true
     label 'annotatePeaks'
     tag 'Homer'

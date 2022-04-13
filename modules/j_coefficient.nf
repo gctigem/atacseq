@@ -4,6 +4,7 @@
 */
 
 process j_coefficient {
+    container 'docker://giusmar/atacseq:0.0.6'
     echo true
     label 'j_coefficient'
     tag 'bedtools'
@@ -28,6 +29,6 @@ process j_coefficient {
     sort -k1,1 -k2,2n ${narrowPeak[1]} > ${sample_id}_rep2_peaks.sorted.narrowPeak
 
     bedtools jaccard -a ${sample_id}_rep1_peaks.sorted.narrowPeak -b ${sample_id}_rep2_peaks.sorted.narrowPeak > ${sample_id}_rep1_rep2.jaccard
-    cat ${sample_id}_rep1_rep2.jaccard | awk -v OFS='\t' -v name=${sample_id} 'FNR == 2 {print name, \$3}' | cat $params.jaccard_score - > ${sample_id}_pulled_peaks.jaccard_score_mqc.tsv
+    cat ${sample_id}_rep1_rep2.jaccard | awk -v OFS='\t' -v name=${sample_id} 'FNR == 2 {print name, \$3}' | cat $baseDir/assets/$params.jaccard_score - > ${sample_id}_pulled_peaks.jaccard_score_mqc.tsv
     """
 }
