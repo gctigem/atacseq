@@ -35,10 +35,8 @@ inputPairReads = Channel.fromPath(input_ch)
 //workflow
 workflow {
 
-     inputPairReads.view()
-
      // echo(reads)
-     //fastqc(inputPairReads)
+     fastqc(inputPairReads)
      // trimming(reads)
      // create_bed()
      // create_tss()
