@@ -28,12 +28,9 @@ include { echo } from './modules/echo'
 if (params.input) { input_ch = file(params.input, checkIfExists: true) } else { exit 1, 'Input samplesheet not specified!' }
 
 //file
-// def channels
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:true, sep:'\t' )
-                            .map( { row -> [sample_id = row[0], 
-                                             rep = row[1],
-                                             reads = row[2..3]] } )
+                            .map( { row -> [sample_id = row[0], rep = row[1], read_1 = row[2], read_2 = row[3]] } )
 
 //workflow
 workflow {
