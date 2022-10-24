@@ -32,10 +32,8 @@ if (params.input) { input_ch = file(params.input, checkIfExists: true) } else { 
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:true, sep:',' )
                             .map( { row -> [idSample = row[0], 
-                                             rep_1_read_1 = row[1],
-                                             rep_1_read_2 = row[2],
-                                             rep_2_read_1 = row[3],
-                                             rep_2_read_2 = row[4]] } )
+                                             rep = row[1],
+                                             reads = row[2..3]] } )
 
 //workflow
 workflow {
