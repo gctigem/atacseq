@@ -1,5 +1,0 @@
-name    rep read1   read2
-ESSRA   rep_1   gs://tigem-gcacchiarelli-01/Runs/200422_A00560_0105_AHJMKVDRXX/Reads/ESSRA_rep1_S2_R1_001.fastq.gz  gs://tigem-gcacchiarelli-01/Runs/200422_A00560_0105_AHJMKVDRXX/Reads/ESSRA_rep1_S2_R2_001.fastq.gz
-ESSRA   rep_2   gs://tigem-gcacchiarelli-01/Runs/200429_A00560_0109_AHJVHWDRXX/Reads/ESSRA_rep2_S2_R1_001.fastq.gz  gs://tigem-gcacchiarelli-01/Runs/200429_A00560_0109_AHJVHWDRXX/Reads/ESSRA_rep2_S2_R2_001.fastq.gz
-GATA5   rep_1   gs://tigem-gcacchiarelli-01/Runs/200422_A00560_0105_AHJMKVDRXX/Reads/GATA5_rep1_S13_R1_001.fastq.gz gs://tigem-gcacchiarelli-01/Runs/200422_A00560_0105_AHJMKVDRXX/Reads/GATA5_rep1_S13_R2_001.fastq.gz
-GATA5   rep_2   gs://tigem-gcacchiarelli-01/Runs/200429_A00560_0109_AHJVHWDRXX/Reads/GATA5_rep2_S14_R1_001.fastq.gz gs://tigem-gcacchiarelli-01/Runs/200429_A00560_0109_AHJVHWDRXX/Reads/GATA5_rep2_S14_R2_001.fastq.gz
