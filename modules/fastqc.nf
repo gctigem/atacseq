@@ -1,9 +1,4 @@
-/* 1
- ##### FASTQC #####
-*/
-
 process fastqc {
-    container 'docker://staphb/fastqc:0.11.9'
     echo true
     label 'fastqc'
     tag 'FASTQC'
@@ -18,7 +13,7 @@ process fastqc {
     tuple val(sample_id), path(reads)
 
     output:
-    file  "*.{zip,html}"
+    tuple val(sample_id), path("*.{zip,html}"), emit: qc_multiqc
 
     script:
     """
