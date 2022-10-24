@@ -30,7 +30,7 @@ if (params.input) { input_ch = file(params.input, checkIfExists: true) } else { 
 //file
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
-                            .map( { row -> [sample_id = row[0], rep = row[1], read_1 = row[2], read_2 = row[3]] } )
+                            .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
 
 //workflow
 workflow {
