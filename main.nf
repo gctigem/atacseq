@@ -31,15 +31,17 @@ if (params.input) { input_ch = file(params.input, checkIfExists: true) } else { 
 // def channels
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:true, sep:',' )
-                            .map( { row -> [idSample = row[0], 
+                            .map( { row -> [sample_id = row[0], 
                                              rep = row[1],
                                              reads = row[2..3]] } )
 
 //workflow
 workflow {
 
+     inputPairReads.view()
+
      // echo(reads)
-     fastqc(inputPairReads)
+     //fastqc(inputPairReads)
      // trimming(reads)
      // create_bed()
      // create_tss()
