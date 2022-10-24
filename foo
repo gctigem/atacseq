@@ -1,0 +1,5 @@
+export NXF_SINGULARITY_CACHEDIR=/workspace/atacseq/.singularity
+export SINGULARITY_CACHEDIR=/workspace/atacseq/.singularity
+export SINGULARITY_TMPDIR=/workspace/atacseq/.singularity
+export TOWER_ACCESS_TOKEN=eyJ0aWQiOiA2NDIwfS41MTcwYTcyMGQ0Njg3MzE0NzRlMDdmODM3ZjkwZTZjMGU4MjIwMjFj
+export GOOGLE_APPLICATION_CREDENTIALS=/workspace/atacseq/ref/tigem-gcacchiarelli-f95725b19327.json
