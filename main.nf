@@ -30,7 +30,7 @@ if (params.input) { input_ch = file(params.input, checkIfExists: true) } else { 
 //file
 // def channels
 inputPairReads = Channel.fromPath(input_ch)
-                            .splitCsv( header:true, sep:',' )
+                            .splitCsv( header:true, sep:'\t' )
                             .map( { row -> [sample_id = row[0], 
                                              rep = row[1],
                                              reads = row[2..3]] } )
