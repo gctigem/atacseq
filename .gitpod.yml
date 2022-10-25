@@ -1,5 +1,4 @@
-image: giusmar/gitpod:latest
-workspaceLocation: atacseq
+image: giusmar/gitpod:2
 
 github:
   prebuilds:
@@ -27,11 +26,7 @@ tasks:
       export PS1='\[\e[3;36m\]${PWD/*\//} ->\[\e[0m\] '
       unset JAVA_TOOL_OPTIONS
       clear
-  - name: Install Nextflow
-    command: |
-      curl -fsSL get.nextflow.io | bash
-      mv nextflow ~/bin/
-
+      
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
     - codezombiech.gitignore # Language support for .gitignore files
