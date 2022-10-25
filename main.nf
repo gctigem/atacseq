@@ -25,7 +25,12 @@ include { featurecounts } from './modules/featurecounts'
 include { echo } from './modules/echo'
 
 // check
-if (params.input) { input_ch = file(params.input, checkIfExists: true) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.input)        { input_ch = file(params.input, checkIfExists: true) }           else { exit 1, 'Input samplesheet not specified!' }
+if (params.genomefai)    { genomefai_ch = file(params.genomefai, checkIfExists: true) }   else { exit 1, 'Genome fai not specified!' }
+if (params.blacklist)    { blacklist_ch = file(params.blacklist, checkIfExists: true) }   else { exit 1, 'Black list not specified!' }
+if (params.fasta)        { fasta_ch = file(params.fasta, checkIfExists: true) }           else { exit 1, 'Fasta not specified!' }
+if (params.gtf)          { gtf_ch = file(params.gtf, checkIfExists: true) }               else { exit 1, 'GTF not specified!' }
+
 
 //file
 inputPairReads = Channel.fromPath(input_ch)
@@ -38,8 +43,8 @@ workflow {
      // echo(reads)
      fastqc(inputPairReads)
      trimming(inputPairReads)
-     // create_bed()
-     // create_tss()
+     create_bed(genomefai_ch,blacklist_ch)
+     create_tss(gtf_ch)
      // alignment(trimming.out.samples_trimmed)
      // samstat(alignment.out.alignment_bam)
      // lc_extrap(samstat.out.sorted_bam)
