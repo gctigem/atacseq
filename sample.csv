@@ -1,5 +1,0 @@
-name,rep,read_1,read_2
-HNF4A,rep_1,gs://tigem-gcacchiarelli-01/Runs/200422_A00560_0105_AHJMKVDRXX/Reads/HNF4A_rep1_S2_R1_001.fastq.gz,gs://tigem-gcacchiarelli-01/Runs/200422_A00560_0105_AHJMKVDRXX/Reads/HNF4A_rep1_S2_R2_001.fastq.gz
-HNF4A,rep_2,gs://tigem-gcacchiarelli-01/Runs/200429_A00560_0109_AHJVHWDRXX/Reads/HNF4A_rep2_S2_R1_001.fastq.gz,gs://tigem-gcacchiarelli-01/Runs/200429_A00560_0109_AHJVHWDRXX/Reads/HNF4A_rep2_S2_R2_001.fastq.gz
-GATA6,rep_1,gs://tigem-gcacchiarelli-01/Runs/200422_A00560_0105_AHJMKVDRXX/Reads/GATA6_rep1_S13_R1_001.fastq.gz,gs://tigem-gcacchiarelli-01/Runs/200422_A00560_0105_AHJMKVDRXX/Reads/GATA6_rep1_S13_R2_001.fastq.gz
-GATA6,rep_2,gs://tigem-gcacchiarelli-01/Runs/200429_A00560_0109_AHJVHWDRXX/Reads/GATA6_rep2_S14_R1_001.fastq.gz,gs://tigem-gcacchiarelli-01/Runs/200429_A00560_0109_AHJVHWDRXX/Reads/GATA6_rep2_S14_R2_001.fastq.gz
