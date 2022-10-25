@@ -1,4 +1,4 @@
-image: chriswyatt/seqeratraining_22.09.7
+image: nfcore/gitpod:latest
 
 github:
   prebuilds:
@@ -15,13 +15,9 @@ github:
     # add a "Review in Gitpod" button to pull requests (defaults to false)
     addBadge: false
 
-task:
-  - name: Start Nextflow
-    command: |
-      source $HOME/.bashrc
-      export PS1='\[\e[3;36m\]${PWD/*\//} ->\[\e[0m\] '
-      unset JAVA_TOOL_OPTIONS
-      clear
+tasks:
+  - name: install current state of nf-core/tools
+    command: python -m pip install nf-core
 
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
