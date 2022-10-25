@@ -45,7 +45,7 @@ workflow {
      trimming(inputPairReads)
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
-     index(fasta)
+     index(fasta_ch)
      align(index.out.fasta_index,trimming.out.samples_trimmed)
      // samstat(alignment.out.alignment_bam)
      // lc_extrap(samstat.out.sorted_bam)
