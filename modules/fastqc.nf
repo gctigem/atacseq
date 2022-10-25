@@ -4,7 +4,8 @@ process fastqc {
     tag 'FASTQC'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
-             if (filename.endsWith("_1.fastq.gz"))     "fastqc/zips/${rep}/$filename"        
+             if (filename.endsWith("zip"))     "fastqc/zip/${rep}/$filename"    
+        else if (filename.endsWith("html"))     "fastqc/${rep}/$filename"
         else null            
     }
 
