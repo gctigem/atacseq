@@ -10,10 +10,10 @@ process align {
 
     input:
     tuple path(fasta), path(index)
-    tuple val(sample_id), path(reads)
+    tuple val(sample_id), val(rep), path(reads)
 
     output:
-    tuple val(sample_id), path('*.bam'), emit: alignment_bam
+    tuple val(sample_id), val(rep), path('*.bam'), emit: mapped
 
     script:
     """
