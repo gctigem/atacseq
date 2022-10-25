@@ -46,7 +46,7 @@ workflow {
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
      index(fasta_ch)
-     align(index.out.fasta_index,trimming.out.fastq)
+     align(index.out.fasta_index.collect(),trimming.out.fastq)
      // samstat(alignment.out.alignment_bam)
      // lc_extrap(samstat.out.sorted_bam)
      // remove_dups(samstat.out.sorted_bam)
