@@ -37,7 +37,7 @@ workflow {
 
      // echo(reads)
      fastqc(inputPairReads)
-     // trimming(reads)
+     trimming(inputPairReads)
      // create_bed()
      // create_tss()
      // alignment(trimming.out.samples_trimmed)
