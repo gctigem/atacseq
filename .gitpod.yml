@@ -27,9 +27,9 @@ tasks:
       unset JAVA_TOOL_OPTIONS
       clear
   - name: Install Nextflow
-      command: |
-        wget -qO- get.nextflow.io | bash
-        sudo mv nextflow /usr/local/bin/
+    command: |
+      wget -qO- get.nextflow.io | bash
+      sudo mv nextflow /usr/local/bin/
 
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
