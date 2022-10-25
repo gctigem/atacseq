@@ -3,7 +3,7 @@ include { fastqc } from './modules/fastqc'
 include { trimming } from './modules/trimming'
 include { create_bed } from './modules/create_bed'
 include { create_tss } from './modules/create_tss'
-include { alignment } from './modules/alignment'
+include { align } from './modules/alignment'
 include { samstat } from './modules/samstat'
 include { lc_extrap } from './modules/lc_extrap'
 include { remove_dups } from './modules/remove_dups'
@@ -45,7 +45,8 @@ workflow {
      trimming(inputPairReads)
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
-     // alignment(trimming.out.samples_trimmed)
+     index(fasta)
+     align(index.out.fasta_index,trimming.out.samples_trimmed)
      // samstat(alignment.out.alignment_bam)
      // lc_extrap(samstat.out.sorted_bam)
      // remove_dups(samstat.out.sorted_bam)
