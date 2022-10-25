@@ -1,9 +1,9 @@
 //modules
-include { fastqc } from './modules/fastqc'
-include { trimming } from './modules/trimming'
-include { create_bed } from './modules/create_bed'
-include { create_tss } from './modules/create_tss'
-include { align } from './modules/align'
+include {      fastqc         }    from './modules/fastqc'
+include {      trimming       }    from './modules/trimming'
+include {      create_bed } from './modules/create_bed'
+include {      create_tss } from './modules/create_tss'
+include {      align } from './modules/align'
 include { index } from './modules/index'
 include { samstat } from './modules/samstat'
 include { lc_extrap } from './modules/lc_extrap'
@@ -47,7 +47,7 @@ workflow {
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
      index(fasta_ch)
-     align(index.out.fasta_index,trimming.out.samples_trimmed)
+     align(index.out.fasta_index,trimming.out.fastq)
      // samstat(alignment.out.alignment_bam)
      // lc_extrap(samstat.out.sorted_bam)
      // remove_dups(samstat.out.sorted_bam)
