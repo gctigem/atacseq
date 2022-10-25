@@ -4,18 +4,18 @@ process index {
     tag 'BWA'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
-             if (filename.indexOf("fa") > 0)     "BWA/$params.bwa_nCoV_fa/$filename"         
+             if (filename.indexOf("fa") > 0)     "BWA/index/$filename"         
         else null            
     }
 
     input:
-    file(fasta)
+    file(fasta_ch)
 
     output:
-    tuple path("$fasta"), path("$fasta*"), emit: fasta_index
+    tuple path("$fasta_ch"), path("$fasta_ch*"), emit: fasta_index
 
     script:
     """
-    bwa index $fasta
+    bwa index $fasta_ch
     """
 }

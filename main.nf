@@ -32,7 +32,6 @@ if (params.blacklist)    { blacklist_ch = file(params.blacklist, checkIfExists: 
 if (params.fasta)        { fasta_ch = file(params.fasta, checkIfExists: true) }           else { exit 1, 'Fasta not specified!' }
 if (params.gtf)          { gtf_ch = file(params.gtf, checkIfExists: true) }               else { exit 1, 'GTF not specified!' }
 
-
 //file
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
