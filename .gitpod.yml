@@ -1,4 +1,5 @@
 image: giusmar/gitpod:latest
+workspaceLocation: atacseq
 
 github:
   prebuilds:
@@ -28,8 +29,8 @@ tasks:
       clear
   - name: Install Nextflow
     command: |
-      wget -qO- get.nextflow.io | bash
-      sudo mv nextflow /usr/local/bin/
+      curl -fsSL get.nextflow.io | bash
+      mv nextflow ~/bin/
 
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
