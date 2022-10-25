@@ -1,4 +1,4 @@
-image: giusmar/gitpod:3
+image: giusmar/gitpod:latest
 
 github:
   prebuilds:
