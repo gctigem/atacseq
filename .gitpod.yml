@@ -1,4 +1,4 @@
-image: giusmar/gitpod:2
+image: giusmar/gitpod:3
 
 github:
   prebuilds:
@@ -16,10 +16,6 @@ github:
     addBadge: false
 
 tasks:
-  - name: install current state of nf-core/tools
-    command: python -m pip install nf-core
-  - name: update nextflow
-    command: nextflow self-update
   - name: Start Gitpod
     command: |
       source $HOME/.bashrc
