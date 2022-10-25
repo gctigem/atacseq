@@ -18,6 +18,8 @@ github:
 tasks:
   - name: install current state of nf-core/tools
     command: python -m pip install nf-core
+  - name: update nextflow
+    command: nextflow self-update
 
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
