@@ -1,0 +1,8 @@
+file:
+  /workspace/atacseq/atac.yml
+
+input:
+  /workspace/atacseq/sample.csv
+
+outdir:
+  /workspace/atacseq/result
