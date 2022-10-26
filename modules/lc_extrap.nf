@@ -9,10 +9,10 @@ process lc_extrap {
     }
 
     input:
-    tuple val(sample_id), value(rep), path(sorted_bam)
+    tuple val(sample_id), val(rep), path(sorted_bam)
 
     output:
-    tuple val(sample_id), value(rep), path("${sample_id}_${rep}.ccurve.txt"), emit: txt
+    tuple val(sample_id), val(rep), path("${sample_id}_${rep}.ccurve.txt"), emit: txt
 
     script:
     """
