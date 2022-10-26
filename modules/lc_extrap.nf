@@ -16,6 +16,6 @@ process lc_extrap {
 
     script:
     """
-    preseq lc_extrap -output ${sample_id}_${rep}.ccurve.txt -verbose -bam -pe ${sorted_bam}
+    preseq lc_extrap -output ${sample_id}_${rep}.ccurve.txt -verbose -pe ${sorted_bam}
     """
 }
