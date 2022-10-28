@@ -13,4 +13,9 @@ process downloadIndex {
 
     output:
     tuple path("$fasta_ch"), path("$fasta_ch*"), emit: fasta_index
+
+    script:
+    """
+    echo "Index downloaded"
+    """
 }
