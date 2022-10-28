@@ -1,7 +1,7 @@
 process downloadIndex {
     echo true
     label 'index'
-    tag 'BWA'
+    tag 'GSUTIL'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("fa") > 0)     "BWA/index/$filename"         
