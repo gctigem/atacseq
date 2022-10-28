@@ -44,16 +44,14 @@ if(params.bwa_downloadIndex){
 //workflow
 workflow {
 
-     index_ch.view()
-
      // index
-     // if(!params.bwa_downloadIndex) {
-     //      index(fasta_ch)
-     //      indexed_ch=index.out.fasta_index
-     // } else {
-     //      downloadIndex(index_ch)
-     //      indexed_ch=downloadIndex.out.fasta_index
-     // }
+     if(!params.bwa_downloadIndex) {
+          index(fasta_ch)
+          indexed_ch=index.out.fasta_index
+     } else {
+          downloadIndex(index_ch)
+          indexed_ch=downloadIndex.out.fasta_index
+     }
 
      // quality
      // fastqc(inputPairReads)

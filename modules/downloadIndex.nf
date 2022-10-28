@@ -9,7 +9,7 @@ process downloadIndex {
     }
 
     input:
-    file(index_ch)
+    path(index_ch)
 
     output:
     tuple path("$fasta_ch"), path("$fasta_ch*"), emit: fasta_index
