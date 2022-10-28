@@ -45,7 +45,7 @@ if(params.bwa_downloadIndex){
 workflow {
 
      // index
-     if(params.bwa_downloadIndex) {
+     if(!params.bwa_downloadIndex) {
           index(fasta_ch)
           indexed_ch=index.out.fasta_index
      } else {
