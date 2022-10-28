@@ -26,27 +26,41 @@ include {      featurecounts  } from './modules/featurecounts'
 include {      echo           } from './modules/echo'
 
 // check
-if (params.input)        { input_ch = file(params.input, checkIfExists: true) }           else { exit 1, 'Input samplesheet not specified!' }
-if (params.genomefai)    { genomefai_ch = file(params.genomefai, checkIfExists: true) }   else { exit 1, 'Genome fai not specified!' }
-if (params.blacklist)    { blacklist_ch = file(params.blacklist, checkIfExists: true) }   else { exit 1, 'Black list not specified!' }
-if (params.fasta)        { fasta_ch = file(params.fasta, checkIfExists: true) }           else { exit 1, 'Fasta not specified!' }
-if (params.gtf)          { gtf_ch = file(params.gtf, checkIfExists: true) }               else { exit 1, 'GTF not specified!' }
+if (params.input)                  { input_ch = file(params.input, checkIfExists: true) }                else { exit 1, 'Input samplesheet not specified!' }
+if (params.genomefai)              { genomefai_ch = file(params.genomefai, checkIfExists: true) }        else { exit 1, 'Genome fai not specified!' }
+if (params.blacklist)              { blacklist_ch = file(params.blacklist, checkIfExists: true) }        else { exit 1, 'Black list not specified!' }
+if (params.fasta)                  { fasta_ch = file(params.fasta, checkIfExists: true) }                else { exit 1, 'Fasta not specified!' }
+if (params.gtf)                    { gtf_ch = file(params.gtf, checkIfExists: true) }                    else { exit 1, 'GTF not specified!' }
+if (params.bwa_downloadIndex)      { indexed = file(params.bwa_downloadIndex, checkIfExists: true) }     else { exit 1, 'Index not specified!' }
 
 //file
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
                             .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
+index_ch = Channel.from( params.indexed )
 
 //workflow
 workflow {
 
-     // echo(reads)
+     // index
+     if(params.bwa_downloadIndex) {
+          index(fasta_ch)
+          indexed_ch=index.out.fasta_index
+     } else {
+          downloadIndex(index_ch)
+          indexed_ch=downloadIndex.out.fasta_index
+     }
+
+     // quality
      fastqc(inputPairReads)
      trimming(inputPairReads)
+
+     // bed and tss
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
-     index(fasta_ch)
-     align(index.out.fasta_index.collect(),trimming.out.fastq)
+
+     // align
+     align(indexed_ch.out.fasta_index,trimming.out.fastq)
      samstat(align.out.mapped)
      lc_extrap(samstat.out.sorted_bam)
      // remove_dups(samstat.out.sorted_bam)
