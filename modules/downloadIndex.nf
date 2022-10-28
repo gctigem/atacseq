@@ -16,6 +16,6 @@ process downloadIndex {
 
     script:
     """
-    echo "Index downloaded"
+    echo Index downloaded
     """
 }
