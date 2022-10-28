@@ -44,27 +44,29 @@ if(params.bwa_downloadIndex){
 //workflow
 workflow {
 
+     index_ch.view()
+
      // index
-     if(!params.bwa_downloadIndex) {
-          index(fasta_ch)
-          indexed_ch=index.out.fasta_index
-     } else {
-          downloadIndex(index_ch)
-          indexed_ch=downloadIndex.out.fasta_index
-     }
+     // if(!params.bwa_downloadIndex) {
+     //      index(fasta_ch)
+     //      indexed_ch=index.out.fasta_index
+     // } else {
+     //      downloadIndex(index_ch)
+     //      indexed_ch=downloadIndex.out.fasta_index
+     // }
 
      // quality
-     fastqc(inputPairReads)
-     trimming(inputPairReads)
+     // fastqc(inputPairReads)
+     // trimming(inputPairReads)
 
-     // bed and tss
-     create_bed(genomefai_ch,blacklist_ch)
-     create_tss(gtf_ch)
+     // // bed and tss
+     // create_bed(genomefai_ch,blacklist_ch)
+     // create_tss(gtf_ch)
 
-     // align
-     align(indexed_ch,trimming.out.fastq)
-     samstat(align.out.mapped)
-     lc_extrap(samstat.out.sorted_bam)
+     // // align
+     // align(indexed_ch,trimming.out.fastq)
+     // samstat(align.out.mapped)
+     // lc_extrap(samstat.out.sorted_bam)
      // remove_dups(samstat.out.sorted_bam)
      // samstat_uniq(remove_dups.out.uniq_bam)
      // input_sf = remove_dups.out.uniq_bam.join(samstat_uniq.out.sorted_uniq_bai)
