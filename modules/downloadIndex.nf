@@ -12,7 +12,7 @@ process downloadIndex {
     path(index_ch)
 
     output:
-    tuple path("genome.fa"), path("genome.fa*"), emit: fasta_index
+    tuple path("genome.fa"), path("genome.fa.*"), emit: fasta_index
 
     script:
     """
