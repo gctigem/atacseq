@@ -64,6 +64,7 @@ workflow {
      // align
      align(indexed_ch.collect(),trimming.out.fastq)
      samstat(align.out.mapped)
+     samstat.out.sorted_bam.view()
      // lc_extrap(samstat.out.sorted_bam)
 
 
