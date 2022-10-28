@@ -62,7 +62,7 @@ workflow {
      create_tss(gtf_ch)
 
      // align
-     align(indexed_ch,trimming.out.fastq)
+     align(indexed_ch.collect(),trimming.out.fastq)
      samstat(align.out.mapped)
      // lc_extrap(samstat.out.sorted_bam)
 
