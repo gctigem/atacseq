@@ -37,7 +37,7 @@ if (params.gtf)                    { gtf_ch = file(params.gtf, checkIfExists: tr
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
                             .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
-if(bwa_downloadIndex){
+if(params.bwa_downloadIndex){
     index_ch = Channel.from( params.indexed ) 
 }
 
