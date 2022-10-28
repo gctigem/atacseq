@@ -61,11 +61,9 @@ workflow {
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
 
-     indexed_ch.view()
-
      // align
-     // align(indexed_ch,trimming.out.fastq)
-     // samstat(align.out.mapped)
+     align(indexed_ch,trimming.out.fastq)
+     samstat(align.out.mapped)
      // lc_extrap(samstat.out.sorted_bam)
 
 
