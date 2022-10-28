@@ -32,13 +32,14 @@ if (params.genomefai)              { genomefai_ch = file(params.genomefai, check
 if (params.blacklist)              { blacklist_ch = file(params.blacklist, checkIfExists: true) }        else { exit 1, 'Black list not specified!' }
 if (params.fasta)                  { fasta_ch = file(params.fasta, checkIfExists: true) }                else { exit 1, 'Fasta not specified!' }
 if (params.gtf)                    { gtf_ch = file(params.gtf, checkIfExists: true) }                    else { exit 1, 'GTF not specified!' }
-if (params.bwa_downloadIndex)      { indexed = file(params.bwa_downloadIndex, checkIfExists: true) }     else { exit 1, 'Index not specified!' }
 
 //file
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
                             .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
-index_ch = Channel.from( params.indexed )
+if(bwa_downloadIndex){
+    index_ch = Channel.from( params.indexed ) 
+}
 
 //workflow
 workflow {
