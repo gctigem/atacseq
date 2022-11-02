@@ -18,6 +18,6 @@ process samstat {
 
     script:
     """
-    samtools view -b -h -F 0x0100 ${mapped} | samtools sort -O bam -o ${sample_id}_${rep}.sorted.bam
+    samtools view -b -h -F 0x0100 ${mapped} | samtools sort -O bam -o ${sample_id}_${rep}.sorted.bam -
     """
 }
