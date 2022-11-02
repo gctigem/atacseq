@@ -4,7 +4,7 @@ process align {
     tag 'BWA'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
-             if (filename.indexOf("bam") > 0)     "align/mapped/$filename"
+             if (filename.indexOf("sam") > 0)     "align/mapped/$filename"
         else null            
     }
 
@@ -13,7 +13,7 @@ process align {
     tuple val(sample_id), val(rep), path(reads)
 
     output:
-    tuple val(sample_id), val(rep), path('*.bam'), emit: mapped
+    tuple val(sample_id), val(rep), path('*.sam'), emit: mapped
 
     script:
     """

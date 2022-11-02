@@ -1,1 +1,9 @@
 | samtools view -b -h -F 0x0100 -o "${sample_id}_${rep}_aligned_reads.bam" 
+
+
+    samtools flagstat ${sample_id}_${rep}.sorted.bam > \
+        ${sample_id}_${rep}.sorted.bam.flagstat
+    samtools idxstats ${sample_id}_${rep}.sorted.bam > \
+        ${sample_id}_${rep}.sorted.bam.idxstats
+    samtools stats ${sample_id}_${rep}.sorted.bam > \
+        ${sample_id}_${rep}.sorted.bam.stats
