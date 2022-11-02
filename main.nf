@@ -56,7 +56,7 @@ workflow {
      align(index.out.fasta_index.collect(),trimming.out.fastq)
      samstat(align.out.mapped)
      samstat.out.sorted_bam.view()
-     // lc_extrap(samstat.out.sorted_bam)
+     lc_extrap(samstat.out.sorted_bam)
 
 
      // remove_dups(samstat.out.sorted_bam)
