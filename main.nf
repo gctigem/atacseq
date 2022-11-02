@@ -37,21 +37,12 @@ if (params.gtf)                    { gtf_ch = file(params.gtf, checkIfExists: tr
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
                             .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
-if(params.bwa_downloadIndex){
-    index_ch = Channel.from( params.indexed ) 
-}
 
 //workflow
 workflow {
 
      // index
-     if(!params.bwa_downloadIndex) {
-          index(fasta_ch)
-          indexed_ch=index.out.fasta_index
-     } else {
-          downloadIndex(index_ch)
-          indexed_ch=downloadIndex.out.fasta_index
-     }
+     index(fasta_ch)
 
      // quality
      fastqc(inputPairReads)
@@ -62,7 +53,7 @@ workflow {
      create_tss(gtf_ch)
 
      // align
-     align(indexed_ch.collect(),trimming.out.fastq)
+     align(index.out.fasta_index.collect(),trimming.out.fastq)
      samstat(align.out.mapped)
      samstat.out.sorted_bam.view()
      // lc_extrap(samstat.out.sorted_bam)
