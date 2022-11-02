@@ -1,0 +1,1 @@
+| samtools view -b -h -F 0x0100 -o "${sample_id}_${rep}_aligned_reads.bam" 

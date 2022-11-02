@@ -17,6 +17,6 @@ process align {
 
     script:
     """
-    bwa mem -M ${fasta} ${reads[0]} ${reads[1]} | samtools view -b -h -F 0x0100 -o "${sample_id}_${rep}_aligned_reads.bam"    
+    bwa mem -M ${fasta} ${reads[0]} ${reads[1]} -o ${sample_id}_${rep}_aligned_reads.sam
     """
 }
