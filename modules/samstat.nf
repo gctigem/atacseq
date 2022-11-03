@@ -5,7 +5,7 @@ process samstat {
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("stats") > 0)     "samstat/${rep}/stats/$filename"
-        else if (filename.endsWith("sorted.bam"))   "samstat/${rep}/sorted/$filename"
+        else if (filename.endsWith("sorted.{bam,bam.bai}"))   "samstat/${rep}/sorted/$filename"
         else null            
     }
 
@@ -13,11 +13,23 @@ process samstat {
     tuple val(sample_id), val(rep), path(mapped)
 
     output:
-    tuple val(sample_id), val(rep), path("*.bam"), emit: sorted_bam
-    // tuple val(sample_id), val(rep), path("*.{flagstat,idxstats,stats}"), emit: stats
+    tuple val(sample_id), val(rep), path("*.{bam,bam.bai}"), emit: sorted_bam
+    tuple val(sample_id), val(rep), path("*.{flagstat,idxstats,stats}"), emit: stats
 
     script:
     """
-    samtools view -b -h -F 0x0100 ${mapped} | samtools sort -O bam -o ${sample_id}_${rep}_sorted.bam -
+    samtools view -b -h -F 0x0100 ${mapped} | \
+        samtools sort -O bam -o ${sample_id}_${rep}_sorted.bam -
+
+    samtools index ${sample_id}_${rep}_sorted.bam 
+
+    samtools flagstat ${sample_id}_${rep}_sorted.bam  > \
+        ${sample_id}_${rep}.sorted.bam.flagstat
+
+    samtools idxstats ${sample_id}_${rep}_sorted.bam > \
+        ${sample_id}_${rep}.sorted.bam.idxstats
+
+    samtools stats ${sample_id}_${rep}_sorted.bam  > \
+        ${sample_id}_${rep}.sorted.bam.stats
     """
 }
