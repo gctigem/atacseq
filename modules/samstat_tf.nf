@@ -1,4 +1,5 @@
 process samstat_tf {
+    container 'docker://giusmar/atacseq:0.1.1'
     echo true
     label 'samstat_tf'
     tag 'samtools'
