@@ -1,9 +1,5 @@
-| samtools view -b -h -F 0x0100 -o "${sample_id}_${rep}_aligned_reads.bam" 
+    multiBamSummary bins \\
+        --bamfiles ${sample_id}_rep_1_third_filtering_sorted.bam ${sample_id}_rep_2_third_filtering_sorted.bam \\
+        -o ${sample_id}_similarity.npz
 
-
-    samtools flagstat ${sample_id}_${rep}.sorted.bam > \
-        ${sample_id}_${rep}.sorted.bam.flagstat
-    samtools idxstats ${sample_id}_${rep}.sorted.bam > \
-        ${sample_id}_${rep}.sorted.bam.idxstats
-    samtools stats ${sample_id}_${rep}.sorted.bam > \
-        ${sample_id}_${rep}.sorted.bam.stats
+    plotCorrelation -in ${sample_id}_similarity.npz --corMethod spearman --labels ${sample_id}_rep1 ${sample_id}_rep2 --skipZeros --whatToPlot heatmap --plotNumbers -o Heatmap_SpearmanCorr_${sample_id}.pdf --outFileCorMatrix SpearmanCorr_mtx_${sample_id}.tab
