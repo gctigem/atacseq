@@ -62,8 +62,9 @@ workflow {
      samstat_uniq(remove_dups.out.uniq_bam)
      input_sf = remove_dups.out.uniq_bam.combine(samstat_uniq.out.sorted_uniq_bam_bai, by: [0,1])
      samstat_sf(input_sf,create_bed.out.regionbed)
+     samstat_tf(samstat_sf.out.sf_sorted_bam)
      
-     // samstat_tf(samstat_sf.out.sf_sorted_bam)
+     
      // similarity(samstat_tf.out.tf_sorted_bam)
      // bamTObedpe(samstat_tf.out.tf_sorted_bam)
      // input_peakcalling = bamTObedpe.out.fragment_bed.join(samstat_tf.out.tf_sorted_bam.join(samstat_tf.out.tf_sorted_flagstat))
