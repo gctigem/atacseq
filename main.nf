@@ -66,11 +66,10 @@ workflow {
 
      // info 
 
-     samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: 'hash')
+     output_tf = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: 'hash')
                .map( { name, rep, file -> [sample_id = name, rep = rep, uno = file[0], due = file[1] ] } )
-               .view()
 
-     //similarity(samstat_tf.out.tf_sorted_bam.groupTuple(by: [0]))
+     similarity(output_tf)
      // bamTObedpe(samstat_tf.out.tf_sorted_bam)
      // input_peakcalling = bamTObedpe.out.fragment_bed.join(samstat_tf.out.tf_sorted_bam.join(samstat_tf.out.tf_sorted_flagstat))
      // peak_calling(input_peakcalling)

@@ -1,4 +1,5 @@
 process similarity {
+    container 'docker://giusmar/atacseq:0.1.3'
     echo true
     label 'similarity'
     tag 'PYTHON'
@@ -9,16 +10,20 @@ process similarity {
     }
 
     input:
-    tuple val(sample_id), val(rep), path(tf_sorted_bam)
+    tuple val(sample_id), val(rep), path(uno), path(due)
 
-    // output:
-    // tuple val(sample_id), val(rep), path("${sample_id}_similarity.npz"), emit: npz
-    // tuple val(sample_id), val(rep), path("Heatmap_SpearmanCorr_${sample_id}.pdf"), emit: pdf
-    // tuple val(sample_id), val(rep), path("SpearmanCorr_mtx_${sample_id}.tab"), emit: tab
+    output:
+    tuple val(sample_id), val(rep), path("${sample_id}_similarity.npz"), emit: npz
+    tuple val(sample_id), val(rep), path("Heatmap_SpearmanCorr_${sample_id}.pdf"), emit: pdf
+    tuple val(sample_id), val(rep), path("SpearmanCorr_mtx_${sample_id}.tab"), emit: tab
 
     script:
     """
-    echo ciao
+    multiBamSummary bins \\
+        --bamfiles ${sample_id}_rep_1_third_filtering_sorted.bam ${sample_id}_rep_2_third_filtering_sorted.bam \\
+        -o ${sample_id}_similarity.npz
+
+    plotCorrelation -in ${sample_id}_similarity.npz --corMethod spearman --labels ${sample_id}_rep1 ${sample_id}_rep2 --skipZeros --whatToPlot heatmap --plotNumbers -o Heatmap_SpearmanCorr_${sample_id}.pdf --outFileCorMatrix SpearmanCorr_mtx_${sample_id}.tab
     """
 
 }
