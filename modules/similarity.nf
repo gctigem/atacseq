@@ -18,7 +18,9 @@ process similarity {
 
     script:
     """
-    multiBamSummary bins --bamfiles ${tf_sorted_bam} -o ${sample_id}_similarity.npz
+    multiBamSummary bins \\
+        --bamfiles ${sample_id}_rep_1_third_filtering_sorted.bam ${sample_id}_rep_2_third_filtering_sorted.bam \\
+        -o ${sample_id}_similarity.npz
 
     plotCorrelation -in ${sample_id}_similarity.npz --corMethod spearman --labels ${sample_id}_rep1 ${sample_id}_rep2 --skipZeros --whatToPlot heatmap --plotNumbers -o Heatmap_SpearmanCorr_${sample_id}.pdf --outFileCorMatrix SpearmanCorr_mtx_${sample_id}.tab
     """
