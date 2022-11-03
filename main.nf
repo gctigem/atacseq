@@ -65,7 +65,7 @@ workflow {
      samstat_tf(samstat_sf.out.sf_sorted_bam)
 
      // info 
-     similarity(samstat_tf.out.tf_sorted_bam.groupTuple(by: 0))
+     similarity(samstat_tf.out.tf_sorted_bam.groupTuple(by: [0,1]))
      // bamTObedpe(samstat_tf.out.tf_sorted_bam)
      // input_peakcalling = bamTObedpe.out.fragment_bed.join(samstat_tf.out.tf_sorted_bam.join(samstat_tf.out.tf_sorted_flagstat))
      // peak_calling(input_peakcalling)
