@@ -66,7 +66,9 @@ workflow {
 
      // info 
 
-     samstat_tf.out.tf_sorted_bam.groupTuple(by: [0]).view()
+     samstat_tf.out.tf_sorted_bam.groupTuple(by: [0])
+               .map( { name, rep, file -> [sample_id = name, rep = rep, uno = file[0,1], due = file[2,3] ] } )
+               .view()
 
      //similarity(samstat_tf.out.tf_sorted_bam.groupTuple(by: [0]))
      // bamTObedpe(samstat_tf.out.tf_sorted_bam)
