@@ -1,7 +1,7 @@
 process samstat_sf {
     echo true
     label 'samstat_sf'
-    tag 'samtools'
+    tag 'SAMTOOLS'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("sorted.bam") > 0)       "samstat/second_filtering/${rep}/$filename"
