@@ -65,12 +65,7 @@ workflow {
      samstat_tf(samstat_sf.out.sf_sorted_bam)
 
      // info 
-
-     input_similarity = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0])
-               .map( { sample, rep, bambai -> [sample_id = sample, rep = rep, file = bambai] } )
-               .view()
-
-     similarity(input_similarity)
+     similarity(samstat_tf.out.tf_sorted_bam.groupTuple(by: [0]))
      // bamTObedpe(samstat_tf.out.tf_sorted_bam)
      // input_peakcalling = bamTObedpe.out.fragment_bed.join(samstat_tf.out.tf_sorted_bam.join(samstat_tf.out.tf_sorted_flagstat))
      // peak_calling(input_peakcalling)
