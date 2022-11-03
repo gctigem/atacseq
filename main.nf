@@ -67,7 +67,7 @@ workflow {
      // info 
 
      input_similarity = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0])
-               .map( { sample, rep, bambai -> [sample_id = sample, rep = rep] } )
+               .map( { sample, rep, bambai -> [sample_id = sample, rep = rep, file = bambai] } )
                .view()
 
      //similarity(samstat_tf.out.tf_sorted_bam.groupTuple(by: [0]))
