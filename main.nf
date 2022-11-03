@@ -64,7 +64,7 @@ workflow {
      samstat_sf(input_sf,create_bed.out.regionbed)
      samstat_tf(samstat_sf.out.sf_sorted_bam)
 
-     samstat_tf.out.tf_sorted_bam.groupTuple(by: [0,1]).view()
+     samstat_tf.out.tf_sorted_bam.collect().groupTuple(by: [0]).view()
      // info 
      // similarity(samstat_tf.out.tf_sorted_bam)
      // bamTObedpe(samstat_tf.out.tf_sorted_bam)
