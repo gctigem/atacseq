@@ -54,10 +54,12 @@ workflow {
 
      // align
      align(index.out.fasta_index.collect(),trimming.out.fastq)
+
+     // stats
      samstat(align.out.mapped)
      lc_extrap(samstat.out.sorted_bam)
-
-     // remove_dups(samstat.out.sorted_bam)
+     remove_dups(samstat.out.sorted_bam)
+     
      // samstat_uniq(remove_dups.out.uniq_bam)
      // input_sf = remove_dups.out.uniq_bam.join(samstat_uniq.out.sorted_uniq_bai)
      // samstat_sf(input_sf,create_bed.out.bed)

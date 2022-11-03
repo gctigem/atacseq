@@ -1,7 +1,7 @@
 process remove_dups {
     echo true
     label 'remove_dups'
-    tag 'Picard'
+    tag 'PICARD'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("bam") > 0)       "picard/$filename"
@@ -10,20 +10,14 @@ process remove_dups {
     }
 
     input:
-    tuple val(sample_id), path(bam)
+    tuple val(sample_id), val(rep), path(sorted_bam)
 
     output:
-    tuple val(sample_id), path("*.sorted.uniq.bam"), emit: uniq_bam
-    tuple val(sample_id), path("*.metrics.txt"), emit: uniq_txt
+    tuple val(sample_id), val(rep), path("${sample_id}_${rep}_sorted_uniq.bam"), emit: uniq_bam
+    tuple val(sample_id), val(rep), path("${sample_id}_${rep}_MarkDuplicates_metrics.txt"), emit: uniq_txt
 
     script:
     """
-    PicardCommandLine MarkDuplicates INPUT=${bam[0]} OUTPUT=${sample_id}_rep1.sorted.uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_rep1.MarkDuplicates.metrics.txt VALIDATION_STRINGENCY=LENIENT
-    
-    rm ${bam[0]}
-    
-    PicardCommandLine MarkDuplicates INPUT=${bam[1]} OUTPUT=${sample_id}_rep2.sorted.uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_rep2.MarkDuplicates.metrics.txt VALIDATION_STRINGENCY=LENIENT
-    
-    rm ${bam[1]}
+    PicardCommandLine MarkDuplicates INPUT=${sorted_bam[0]} OUTPUT=${sample_id}_${rep}_sorted_uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_${rep}_MarkDuplicates_metrics.txt VALIDATION_STRINGENCY=LENIENT
     """
 }
