@@ -61,8 +61,7 @@ workflow {
      remove_dups(samstat.out.sorted_bam)
      samstat_uniq(remove_dups.out.uniq_bam)
      input_sf = remove_dups.out.uniq_bam.join(samstat_uniq.out.sorted_uniq_bam_bai)
-     input_sf.view()
-     // samstat_sf(input_sf,create_bed.out.bed)
+     samstat_sf(input_sf,create_bed.out.bed)
      
      // samstat_tf(samstat_sf.out.sf_sorted_bam)
      // similarity(samstat_tf.out.tf_sorted_bam)
