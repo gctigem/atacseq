@@ -66,7 +66,7 @@ workflow {
 
      // info 
 
-     samstat_tf.out.tf_sorted_bam.groupTuple(by: [0])
+     samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: true)
                .map( { name, rep, file -> [sample_id = name, rep = rep, uno = file[0], due = file[1] ] } )
                .view()
 
