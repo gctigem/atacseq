@@ -11,10 +11,10 @@ process similarity {
     input:
     tuple val(sample_id), val(rep), path(tf_sorted_bam)
 
-    output:
-    tuple val(sample_id), val(rep), path("${sample_id}_similarity.npz"), emit: npz
-    tuple val(sample_id), val(rep), path("Heatmap_SpearmanCorr_${sample_id}.pdf"), emit: pdf
-    tuple val(sample_id), val(rep), path("SpearmanCorr_mtx_${sample_id}.tab"), emit: tab
+    // output:
+    // tuple val(sample_id), val(rep), path("${sample_id}_similarity.npz"), emit: npz
+    // tuple val(sample_id), val(rep), path("Heatmap_SpearmanCorr_${sample_id}.pdf"), emit: pdf
+    // tuple val(sample_id), val(rep), path("SpearmanCorr_mtx_${sample_id}.tab"), emit: tab
 
     script:
     """
