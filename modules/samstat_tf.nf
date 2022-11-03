@@ -9,12 +9,12 @@ process samstat_tf {
     }
 
     input:
-    tuple val(sample_id), value(rep), path(sf_sorted_bam)
+    tuple val(sample_id), val(rep), path(sf_sorted_bam)
 
     output:
-    tuple val(sample_id), value(rep), path("${sample_id}_${rep}_orphanfilt.bam"), emit: tf_orphan_bam
-    tuple val(sample_id), value(rep), path("${sample_id}_${rep}_third_filtering_sorted.{bam,bam.bai}"), emit: tf_sorted_bam
-    tuple val(sample_id), value(rep), path("*.{flagstat,idxstats,stats}"), emit: tf_sorted_flagstat
+    tuple val(sample_id), val(rep), path("${sample_id}_${rep}_orphanfilt.bam"), emit: tf_orphan_bam
+    tuple val(sample_id), val(rep), path("${sample_id}_${rep}_third_filtering_sorted.{bam,bam.bai}"), emit: tf_sorted_bam
+    tuple val(sample_id), val(rep), path("*.{flagstat,idxstats,stats}"), emit: tf_sorted_flagstat
 
     script:
     """
