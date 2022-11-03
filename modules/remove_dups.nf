@@ -4,8 +4,8 @@ process remove_dups {
     tag 'PICARD'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
-             if (filename.indexOf("bam") > 0)       "picard/$filename"
-        else if (filename.indexOf("txt") > 0)       "picard/metrics/$filename"
+             if (filename.indexOf("bam") > 0)       "picard/${rep}/$filename"
+        else if (filename.indexOf("txt") > 0)       "picard/${rep}/metrics/$filename"
         else null            
     }
 
