@@ -1,5 +1,4 @@
 process similarity {
-    container 'docker://giusmar/atacseq:0.1.3'
     echo true
     label 'similarity'
     tag 'PYTHON'
