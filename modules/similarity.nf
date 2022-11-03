@@ -9,7 +9,7 @@ process similarity {
     }
 
     input:
-    tuple val(sample_id), val(rep), path(uno), path(due)
+    tuple val(sample_id), val(rep), path(tf_sorted_one), path(tf_sorted_two)
 
     output:
     tuple val(sample_id), val(rep), path("${sample_id}_similarity.npz"), emit: npz
@@ -19,10 +19,10 @@ process similarity {
     script:
     """
     multiBamSummary bins \\
-        --bamfiles ${sample_id}_rep_1_third_filtering_sorted.bam ${sample_id}_rep_2_third_filtering_sorted.bam \\
+        --bamfiles ${tf_sorted_one} ${tf_sorted_two} \\
         -o ${sample_id}_similarity.npz
 
-    plotCorrelation -in ${sample_id}_similarity.npz --corMethod spearman --labels ${sample_id}_rep1 ${sample_id}_rep2 --skipZeros --whatToPlot heatmap --plotNumbers -o Heatmap_SpearmanCorr_${sample_id}.pdf --outFileCorMatrix SpearmanCorr_mtx_${sample_id}.tab
+    plotCorrelation -in ${sample_id}_similarity.npz --corMethod spearman --labels ${sample_id}_${rep[0]} ${sample_id}_${rep[1]} --skipZeros --whatToPlot heatmap --plotNumbers -o Heatmap_SpearmanCorr_${sample_id}.pdf --outFileCorMatrix SpearmanCorr_mtx_${sample_id}.tab
     """
 
 }
