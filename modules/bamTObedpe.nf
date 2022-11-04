@@ -1,12 +1,7 @@
-/* 
- ##### Convert BAM to BEDPE  #####
-*/
-
 process bamTObedpe {
-    container 'docker://giusmar/atacseq:0.0.6'
     echo true
     label 'bamTObedpe'
-    tag 'samtools'
+    tag 'SAMTOOLS'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("sorted.bam") > 0)       "samtools/bamTObedpe/${rep}/name_sorted/$filename"
