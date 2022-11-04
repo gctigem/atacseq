@@ -72,12 +72,14 @@ workflow {
      
      // peak calling
      bamTObedpe(samstat_tf.out.tf_sorted_bam)
+
      input_pc = bamTObedpe.out.fragment_bed.combine(
           samstat_tf.out.tf_sorted_bam.combine(
                samstat_tf.out.tf_sorted_flagstat, by: [0,1]),
-                                                  by: [0,1]).view()
+                                                  by: [0,1])
 
-     // peak_calling(input_peakcalling)
+     peak_calling(input_pc)
+     
      // j_coefficient(peak_calling.out.narrowPeak)
      // summary_plot(peak_calling.out.narrowPeak)
      // idr(peak_calling.out.narrowPeak)
