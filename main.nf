@@ -79,7 +79,9 @@ workflow {
                                                   by: [0,1])
 
      peak_calling(input_pc)
-     
+
+     input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'hash').view()
+
      // j_coefficient(peak_calling.out.narrowPeak)
      // summary_plot(peak_calling.out.narrowPeak)
      // idr(peak_calling.out.narrowPeak)
