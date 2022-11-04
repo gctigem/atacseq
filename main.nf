@@ -72,7 +72,10 @@ workflow {
      
      // peak calling
      bamTObedpe(samstat_tf.out.tf_sorted_bam)
-     input_pc = bamTObedpe.out.fragment_bed.join(samstat_tf.out.tf_sorted_bam.join(samstat_tf.out.tf_sorted_flagstat)).view()
+     input_pc = bamTObedpe.out.fragment_bed.combine(
+          samstat_tf.out.tf_sorted_bam.combine(
+               samstat_tf.out.tf_sorted_flagstat, by: [0,1],
+                                                  by: [0,1])).view()
 
      // peak_calling(input_peakcalling)
      // j_coefficient(peak_calling.out.narrowPeak)
