@@ -18,7 +18,7 @@ process bamTObedpe {
 
     script:
     """
-    samtools sort -n -o ${sample_id}_${rep}_name_sorted.bam ${tf_sorted_bam}
+    samtools sort -n -o ${sample_id}_${rep}_name_sorted.bam ${tf_sorted_bam[0]}
     bedtools bamtobed -i ${sample_id}_${rep}_name_sorted.bam -bedpe | \\
      awk -v OFS="\t" '{if(\$9=="+"){print \$1,\$2+4,\$6+4}else if(\$9=="-"){print \$1,\$2-5,\$6-5}}' > ${sample_id}_${rep}_fragments.bed
     """
