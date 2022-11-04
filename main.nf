@@ -17,7 +17,7 @@ include {      bamTObedpe     } from './modules/bamTObedpe'
 include {      peak_calling   } from './modules/peak_calling'
 include {      j_coefficient  } from './modules/j_coefficient'
 include {      summary_plot   } from './modules/summary_plot'
-include {      idr            } from './modules/IDR'
+include {      idr            } from './modules/idr'
 include {      ataqv          } from './modules/ATAQV'
 include {      bigwig         } from './modules/bigwig'
 include {      idr_peaks      } from './modules/idr_peaks'
@@ -83,8 +83,8 @@ workflow {
      input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'true')
 
      j_coefficient(input_jc)
-     summary_plot(input_jc)
-     // idr(peak_calling.out.narrowPeak)
+     //summary_plot(input_jc)
+     idr(input_jc)
      // input_ataqv = peak_calling.out.narrowPeak.join(samstat_tf.out.tf_sorted_bam)
      // ataqv(input_ataqv,create_tss.out.tssbed)
      // input_bigwig = samstat_tf.out.tf_sorted_flagstat.join(samstat_tf.out.tf_sorted_bam)
