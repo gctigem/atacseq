@@ -83,8 +83,7 @@ workflow {
      input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'true')
 
      j_coefficient(input_jc)
-
-     // summary_plot(peak_calling.out.narrowPeak)
+     summary_plot(input_jc)
      // idr(peak_calling.out.narrowPeak)
      // input_ataqv = peak_calling.out.narrowPeak.join(samstat_tf.out.tf_sorted_bam)
      // ataqv(input_ataqv,create_tss.out.tssbed)

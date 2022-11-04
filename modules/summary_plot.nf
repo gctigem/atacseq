@@ -1,29 +1,24 @@
-/* 
- ##### Summary plot for peak calling ##  #####
-*/
-
 process summary_plot {
-    container 'docker://giusmar/r-code:0.0.2'
     echo true
     label 'summary_plot'
     tag 'R'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
-             if (filename.indexOf("rep1") > 0)       "R/QC/rep1/$filename"
-        else if (filename.indexOf("rep2") > 0)       "R/QC/rep2/$filename"
+             if (filename.indexOf("txt") > 0)       "R/QC/${rep[0]}/txt/$filename"
+        else if (filename.indexOf("pdf") > 0)       "R/QC/${rep[1]}/pdf/$filename"
         else null            
     }
 
     input:
-    tuple val(sample_id), path(narrowPeak)
+    tuple val(sample_id), val(rep), path(narrowPeak)
 
     output:
-    tuple val(sample_id), path("*.txt"), emit: summary_txt
-    tuple val(sample_id), path("*.pdf"), emit: summary_pdf
+    tuple val(sample_id), val(rep), path("*.txt"), emit: summary_txt
+    tuple val(sample_id), val(rep), path("*.pdf"), emit: summary_pdf
 
     script:
     """
-    plot_macs_qc.r -i ${narrowPeak[0]} -s ${sample_id}_rep1_peaks -p macs_peak.${sample_id}_rep1
-    plot_macs_qc.r -i ${narrowPeak[1]} -s ${sample_id}_rep2_peaks -p macs_peak.${sample_id}_rep2
+    plot_macs_qc.r -i ${narrowPeak[0]} -s ${sample_id}_${rep[0]}_peaks -p macs_peak.${sample_id}_${rep[0]}
+    plot_macs_qc.r -i ${narrowPeak[1]} -s ${sample_id}_${rep[1]}_peaks -p macs_peak.${sample_id}_${rep[1]}
     """
 }
