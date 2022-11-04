@@ -65,7 +65,7 @@ workflow {
      samstat_tf(samstat_sf.out.sf_sorted_bam)
 
      // info 
-     input_sim = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: 'hash')
+     input_sim = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: 'true')
                .map( { name, rep, file -> [sample_id = name, rep = rep, uno = file[0], due = file[1] ] } )
 
      similarity(input_sim)
@@ -80,9 +80,10 @@ workflow {
 
      peak_calling(input_pc)
 
-     input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'true').view()
+     input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'true')
 
-     // j_coefficient(peak_calling.out.narrowPeak)
+     j_coefficient(input_jc)
+     
      // summary_plot(peak_calling.out.narrowPeak)
      // idr(peak_calling.out.narrowPeak)
      // input_ataqv = peak_calling.out.narrowPeak.join(samstat_tf.out.tf_sorted_bam)
