@@ -1,4 +1,4 @@
-process ATAQV {
+process ataqv {
     echo true
     label 'ataqv'
     tag 'ATAQV'
@@ -11,23 +11,17 @@ process ATAQV {
     }
 
     input:
-    tuple val(sample_id), path(narrowPeak), path(tf_sorted_bam)
+    tuple val(sample_id), val(rep), path(narrowPeak), path(tf_sorted_bam)
     path(tssbed)
 
-    output:
-    tuple val(sample_id), path("*.json"), emit: json
-    tuple val(sample_id), path("*.out"), emit: out
-    tuple val(sample_id), path("*.html"), emit: html
+    // output:
+    // tuple val(sample_id), path("*.json"), emit: json
+    // tuple val(sample_id), path("*.out"), emit: out
+    // tuple val(sample_id), path("*.html"), emit: html
 
 
     script:
     """
-    samtools index ${tf_sorted_bam[0]}
-    ataqv --peak-file ${narrowPeak[0]} --tss-file ${tssbed} --metrics-file ${sample_id}_rep1.ataqv.json --name ${sample_id}_rep1  --ignore-read-groups --autosomal-reference-file $baseDir/assets/$params.autosomesbed MT ${tf_sorted_bam[0]} > ${sample_id}_rep1.ataqv.out
-    
-    samtools index ${tf_sorted_bam[1]}
-    ataqv --peak-file ${narrowPeak[1]} --tss-file ${tssbed} --metrics-file ${sample_id}_rep2.ataqv.json --name ${sample_id}_rep2  --ignore-read-groups --autosomal-reference-file $baseDir/assets/$params.autosomesbed MT ${tf_sorted_bam[1]} > ${sample_id}_rep2.ataqv.out
-
-    mkarv ${sample_id}_qc.html ${sample_id}_rep1.ataqv.json ${sample_id}_rep2.ataqv.json
+    ataqv --peak-file ${narrowPeak} --tss-file ${tssbed} --metrics-file ${sample_id}_${rep}.ataqv.json --name ${sample_id}_${rep}  --ignore-read-groups --autosomal-reference-file $baseDir/assets/$params.autosomesbed MT ${tf_sorted_bam[0]} > ${sample_id}_${rep}.ataqv.out
     """
 }
