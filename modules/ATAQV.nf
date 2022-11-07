@@ -1,4 +1,4 @@
-process ataqv {
+process ATAQV {
     echo true
     label 'ataqv'
     tag 'ATAQV'
