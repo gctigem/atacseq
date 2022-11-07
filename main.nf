@@ -18,7 +18,7 @@ include {      peak_calling   } from './modules/peak_calling'
 include {      j_coefficient  } from './modules/j_coefficient'
 include {      summary_plot   } from './modules/summary_plot'
 include {      idr            } from './modules/idr'
-include {      ataqv          } from './modules/ATAQV'
+include {      ataqv          } from './modules/ataqv'
 include {      bigwig         } from './modules/bigwig'
 include {      idr_peaks      } from './modules/idr_peaks'
 include {      annotatePeaks  } from './modules/annotatePeaks'
@@ -85,7 +85,7 @@ workflow {
      j_coefficient(input_jc)
      summary_plot(input_jc)
      idr(input_jc)
-     input_av = input_jc.combine(samstat_tf.out.tf_sorted_bam, by: [0,1]).view()
+     input_av = peak_calling.out.narrowPeak.combine(samstat_tf.out.tf_sorted_bam, by: [0,1]).view()
 
      // ataqv(input_ataqv,create_tss.out.tssbed)
      // input_bigwig = samstat_tf.out.tf_sorted_flagstat.join(samstat_tf.out.tf_sorted_bam)

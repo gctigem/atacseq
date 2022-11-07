@@ -1,12 +1,7 @@
-/* 
- ##### ATAQV  #####
-*/
-
 process ataqv {
-    container 'docker://giusmar/atacseq:0.0.10'
     echo true
     label 'ataqv'
-    tag 'ataqv'
+    tag 'ATAQV'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("rep1") > 0)       "ATAQV/rep1/$filename"
