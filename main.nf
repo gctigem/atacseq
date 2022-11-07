@@ -85,7 +85,7 @@ workflow {
      j_coefficient(input_jc)
      summary_plot(input_jc)
      idr(input_jc)
-     input_av = peak_calling.out.narrowPeak.combine(samstat_tf.out.tf_sorted_bam, by: [0]).view()
+     input_av = peak_calling.out.narrowPeak.combine(samstat_tf.out.tf_sorted_bam, by: [0,1]).view()
 
      // ataqv(input_ataqv,create_tss.out.tssbed)
      // input_bigwig = samstat_tf.out.tf_sorted_flagstat.join(samstat_tf.out.tf_sorted_bam)
