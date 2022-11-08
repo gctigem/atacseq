@@ -1,37 +1,27 @@
-/* 
- ##### bigwig  #####
- Create normalized bigwig files
-*/
-
 process bigwig {
-    container 'docker://giusmar/atacseq:0.0.12'
     echo true
     label 'bigwig'
-    tag 'bedtools'
+    tag 'BEDTOOLS'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
-             if (filename.indexOf("rep1") > 0)       "bedGraph/rep1/$filename"
-        else if (filename.indexOf("rep2") > 0)       "bedGraph/rep2/$filename"
-        else if (filename.indexOf("txt") > 0)       "bedGraph/txt/$filename"
+             if (filename.indexOf("bedGraph") > 0)       "bedGraph/${rep}/bedGraph/$filename"
+        else if (filename.indexOf("bigWig") > 0)       "bedGraph/${rep}/bigWig/$filename"
+        else if (filename.indexOf("scale_factor") > 0)       "bedGraph/${rep}/txt/$filename"
         else null            
     }
 
     input:
-    tuple val(sample_id), path(tf_sorted_flagstat), path(tf_sorted_bam)
+    tuple val(sample_id), val(rep), path(tf_sorted_bam), path(tf_sorted_flagstat)
 
     output:
-    tuple val(sample_id), path("*.bedGraph"), emit: bedGraph
-    tuple val(sample_id), path("*.bigWig"), emit: bigWig
-    tuple val(sample_id), path("*.txt"), emit: txt
+    tuple val(sample_id), val(rep), path("${sample_id}_${rep}.bedGraph"), emit: bedGraph
+    tuple val(sample_id), val(rep), path("${sample_id}_${rep}.bigWig"), emit: bigWig
+    tuple val(sample_id), val(rep), path("${sample_id}_${rep}.scale_factor.txt"), emit: txt
 
     script:
     """
-    echo `grep 'mapped (' ${tf_sorted_flagstat[0]} | awk '{print 1000000/\$1}'` > ${sample_id}_rep1.scale_factor.txt
-    bedtools genomecov -ibam ${tf_sorted_bam[0]} -bg -scale ${sample_id}_rep1.scale_factor.txt -pc | sort -k1,1 -k2,2n > ${sample_id}_rep1.bedGraph
-    bedGraphToBigWig ${sample_id}_rep1.bedGraph $baseDir/assets/$params.sizes ${sample_id}_rep1.bigWig
-
-    echo `grep 'mapped (' ${tf_sorted_flagstat[1]} | awk '{print 1000000/\$1}'` > ${sample_id}_rep2.scale_factor.txt
-    bedtools genomecov -ibam ${tf_sorted_bam[1]} -bg -scale ${sample_id}_rep2.scale_factor.txt -pc | sort -k1,1 -k2,2n > ${sample_id}_rep2.bedGraph
-    bedGraphToBigWig ${sample_id}_rep2.bedGraph $baseDir/assets/$params.sizes ${sample_id}_rep2.bigWig
+    echo `grep 'mapped (' ${tf_sorted_flagstat[0]} | awk '{print 1000000/\$1}'` > ${sample_id}_${rep}.scale_factor.txt
+    bedtools genomecov -ibam ${tf_sorted_bam[0]} -bg -scale ${sample_id}_${rep}.scale_factor.txt -pc | sort -k1,1 -k2,2n > ${sample_id}_${rep}.bedGraph
+    bedGraphToBigWig ${sample_id}_${rep}.bedGraph $baseDir/assets/$params.sizes ${sample_id}_${rep}.bigWig
     """
 }
