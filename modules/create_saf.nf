@@ -1,13 +1,7 @@
-/* 1
- ##### SAF #####
- # Create SAF file for featurecounts
-*/
-
 process create_saf {
-    container 'docker://giusmar/atacseq:0.0.12'
     echo true
     label 'create_saf'
-    tag 'bash'
+    tag 'BASH'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("saf") > 0)     "IDR/saf/$filename"          
@@ -18,7 +12,7 @@ process create_saf {
     path(homer_bed)
 
     output:
-    path("*.saf"), emit: saf
+    path("merged_peaks_160_IDR_peaks.IDR_peaks.saf"), emit: saf
 
     script:
     """
