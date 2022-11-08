@@ -24,7 +24,6 @@ include {      idr_peaks      } from './modules/idr_peaks'
 include {      annotatePeaks  } from './modules/annotatePeaks'
 include {      create_saf     } from './modules/create_saf'
 include {      featurecounts  } from './modules/featurecounts'
-include {      echo           } from './modules/echo'
 
 // check
 if (params.input)                  { input_ch = file(params.input, checkIfExists: true) }                else { exit 1, 'Input samplesheet not specified!' }
