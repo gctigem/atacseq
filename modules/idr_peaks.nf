@@ -1,9 +1,4 @@
-/* 
- #### IDR peaks ####
-*/
-
 process idr_peaks {
-    container 'docker://giusmar/atacseq:0.0.12'
     echo true
     label 'idr_peaks'
     tag 'bedtools'
@@ -14,7 +9,7 @@ process idr_peaks {
     }
 
     input:
-    path(ird_filtered_bed)
+    tuple val(sample_id), val(rep), path(ird_filtered_bed)
 
     output:
     path("*homer_160_IDR_peaks.bed"), emit: homer_bed
