@@ -89,6 +89,8 @@ workflow {
      input_av = peak_calling.out.narrowPeak.combine(samstat_tf.out.tf_sorted_bam, by: [0,1])
      ataqv(input_av,create_tss.out.tssbed)
 
+     ataqv.out.json.groupTuple(by: [0], sort: 'hash').view()
+
      // input_bigwig = samstat_tf.out.tf_sorted_flagstat.join(samstat_tf.out.tf_sorted_bam)
      // bigwig(input_bigwig)
      // idr_peaks(idr.out.filtered_bed.collect())
