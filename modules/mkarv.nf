@@ -1,5 +1,5 @@
 process mkarv {
-    container 'docker://umichbfxcore/ataqv:0.1.0'
+    container 'docker://giusmar/atacseq:0.1.6'
     echo true
     label 'mkarv'
     tag 'ATAQV'
@@ -17,6 +17,6 @@ process mkarv {
 
     script:
     """
-    mkarv ${sample_id}_qc.html ${json}
+    mkarv ${sample_id}_qc.html ${json} -t /ataqv/src/web
     """
 }
