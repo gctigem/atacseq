@@ -13,8 +13,8 @@ process idr {
     tuple val(sample_id), val(rep), path(narrowPeak)
 
     output:
-    tuple val(sample_id), val(rep), path("${sample_id}_IDR_filtered.bed"), emit: filtered_bed
-    tuple val(sample_id), val(rep), file("*.png"), emit: png
+    tuple val(sample_id), path("${sample_id}_IDR_filtered.bed"), emit: filtered_bed
+    tuple val(sample_id), path("*.png"), emit: png
 
     script:
     """

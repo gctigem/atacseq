@@ -74,7 +74,7 @@ workflow {
      input_bw = samstat_tf.out.tf_sorted_bam.combine(
                samstat_tf.out.tf_sorted_flagstat, by: [0,1])
      bigwig(input_bw)
-     idr.out.filtered_bed.groupTuple(by: [0,1]).view()
+     idr.out.filtered_bed.collect{ it[1] }.view()
      //idr_peaks(idr.out.filtered_bed)
      // annotatePeaks(idr_peaks.out.homer_bed)
      // create_saf(idr_peaks.out.homer_bed)  
