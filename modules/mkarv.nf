@@ -17,6 +17,6 @@ process mkarv {
 
     script:
     """
-    mkarv ${sample_id}_qc.html ${json} -t /ataqv/src/web
+    mkarv ${sample_id}_qc ${json} -t /ataqv/src/web
     """
 }
