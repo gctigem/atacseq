@@ -1,5 +1,4 @@
 process ataqv {
-    container 'docker://giusmar/atacseq:0.1.5'
     echo true
     label 'ataqv'
     tag 'ATAQV'
