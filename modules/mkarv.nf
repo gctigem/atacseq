@@ -13,7 +13,7 @@ process mkarv {
     tuple val(sample_id), val(rep), path(json)
     
     output:
-    tuple val(sample_id), val(rep), path("${sample_id}_qc.html"), emit: html
+    tuple val(sample_id), val(rep), path("${sample_id}_qc"), emit: qc
 
 
     script:
