@@ -19,6 +19,7 @@ include {      j_coefficient  } from './modules/j_coefficient'
 include {      summary_plot   } from './modules/summary_plot'
 include {      idr            } from './modules/idr'
 include {      ataqv          } from './modules/ataqv'
+include {      mkarv          } from './modules/mkarv'
 include {      bigwig         } from './modules/bigwig'
 include {      idr_peaks      } from './modules/idr_peaks'
 include {      annotatePeaks  } from './modules/annotatePeaks'
@@ -41,21 +42,12 @@ inputPairReads = Channel.fromPath(input_ch)
 //workflow
 workflow {
 
-     // index
      index(fasta_ch)
-
-     // quality
      fastqc(inputPairReads)
      trimming(inputPairReads)
-
-     // bed and tss
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
-
-     // align
      align(index.out.fasta_index.collect(),trimming.out.fastq)
-
-     // stats
      samstat(align.out.mapped)
      lc_extrap(samstat.out.sorted_bam)
      remove_dups(samstat.out.sorted_bam)
@@ -63,33 +55,22 @@ workflow {
      input_sf = remove_dups.out.uniq_bam.combine(samstat_uniq.out.sorted_uniq_bam_bai, by: [0,1])
      samstat_sf(input_sf,create_bed.out.regionbed)
      samstat_tf(samstat_sf.out.sf_sorted_bam)
-
-     // info 
      input_sim = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: 'hash')
                .map( { name, rep, file -> [sample_id = name, rep = rep, uno = file[0], due = file[1] ] } )
-
      similarity(input_sim)
-     
-     // peak calling
      bamTObedpe(samstat_tf.out.tf_sorted_bam)
-
      input_pc = bamTObedpe.out.fragment_bed.combine(
           samstat_tf.out.tf_sorted_bam.combine(
                samstat_tf.out.tf_sorted_flagstat, by: [0,1]),
                                                   by: [0,1])
-
      peak_calling(input_pc)
-
      input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'true')
-
      j_coefficient(input_jc)
      summary_plot(input_jc)
      idr(input_jc)
-     
      input_av = peak_calling.out.narrowPeak.combine(samstat_tf.out.tf_sorted_bam, by: [0,1])
      ataqv(input_av,create_tss.out.tssbed)
-
-     ataqv.out.json.groupTuple(by: [0], sort: 'hash').view()
+     mkarv(ataqv.out.json.groupTuple(by: [0], sort: 'hash'))
 
      // input_bigwig = samstat_tf.out.tf_sorted_flagstat.join(samstat_tf.out.tf_sorted_bam)
      // bigwig(input_bigwig)
