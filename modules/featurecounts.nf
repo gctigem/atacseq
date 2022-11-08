@@ -1,16 +1,10 @@
-/* 
- ##### featurecounts #####
- # Create SAF file for featurecounts
-*/
-
 process featurecounts {
-    container 'docker://giusmar/atacseq:0.0.13'
     echo true
     label 'featurecounts'
-    tag 'featurecounts'
+    tag 'SUBREAD'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
-             if (filename.indexOf("txt") > 0)     "featurecounts/$filename"          
+             if (filename.indexOf("txt") > 0)     "SUBREAD/featurecounts/$filename"          
         else null            
     }
 
@@ -19,7 +13,7 @@ process featurecounts {
     path(tf_sorted_bam)
 
     output:
-    path("*.txt"), emit: count
+    path("IDR_peaks.featureCounts.txt"), emit: featureCounts
 
     script:
     """

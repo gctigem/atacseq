@@ -71,12 +71,11 @@ workflow {
      input_av = peak_calling.out.narrowPeak.combine(samstat_tf.out.tf_sorted_bam, by: [0,1])
      ataqv(input_av,create_tss.out.tssbed)
      mkarv(ataqv.out.json.groupTuple(by: [0], sort: 'true'))
-     input_bw = samstat_tf.out.tf_sorted_bam.combine(
-               samstat_tf.out.tf_sorted_flagstat, by: [0,1])
+     input_bw = samstat_tf.out.tf_sorted_bam.combine(samstat_tf.out.tf_sorted_flagstat, by: [0,1])
      bigwig(input_bw)
      idr_peaks(idr.out.filtered_bed.collect{ it[1] })
      annotatePeaks(idr_peaks.out.homer_bed,fasta_ch,gtf_ch)
      create_saf(idr_peaks.out.homer_bed)  
-     // featurecounts(create_saf.out.saf,samstat_tf.out.bam.collect())
+     featurecounts(create_saf.out.saf,samstat_tf.out.bam.collect{ it[2]}))
 
 }
