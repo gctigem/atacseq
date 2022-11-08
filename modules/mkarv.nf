@@ -1,5 +1,5 @@
 process mkarv {
-    container 'docker://giusmar/atacseq:0.1.6'
+    container 'docker://umichbfxcore/ataqv:0.1.0'
     echo true
     label 'mkarv'
     tag 'ATAQV'
