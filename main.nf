@@ -76,6 +76,6 @@ workflow {
      idr_peaks(idr.out.filtered_bed.collect{ it[1] })
      annotatePeaks(idr_peaks.out.homer_bed,fasta_ch,gtf_ch)
      create_saf(idr_peaks.out.homer_bed)  
-     featurecounts(create_saf.out.saf,samstat_tf.out.bam.collect{ it[2]}))
+     featurecounts(create_saf.out.saf,samstat_tf.out.bam.collect{ it[2]})
 
 }
