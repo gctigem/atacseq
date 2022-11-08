@@ -12,10 +12,9 @@ process idr {
     input:
     tuple val(sample_id), val(rep), path(narrowPeak)
 
-    //output:
-    //tuple val(sample_id), val(rep), path("*_filtered.bed"), emit: filtered_bed
-    //tuple val(sample_id), val(rep), file("*.png"), emit: png
-
+    output:
+    tuple val(sample_id), val(rep), path("${sample_id}_filtered.bed"), emit: filtered_bed
+    tuple val(sample_id), val(rep), file("*.png"), emit: png
 
     script:
     """
