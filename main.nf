@@ -44,7 +44,7 @@ workflow {
 
      index(fasta_ch)
      fastqc(inputPairReads)
-     trimming(inputPairReads)
+     trimming(inputPairReads.collect())
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
      align(index.out.fasta_index.collect(),trimming.out.fastq)
