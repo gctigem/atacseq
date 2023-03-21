@@ -1,3 +1,5 @@
+nextflow.enable.dsl=2
+
 //modules
 include {      fastqc         } from './modules/fastqc'
 include {      trimming       } from './modules/trimming'
