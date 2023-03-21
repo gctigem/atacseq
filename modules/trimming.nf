@@ -22,9 +22,6 @@ process trimming {
     """
     ln -s ${reads[0]} ${sample_id}_${rep}_1.fastq.gz
     ln -s ${reads[1]} ${sample_id}_${rep}_2.fastq.gz
-    trim_galore --gzip \
-        --fastqc --paired ${sample_id}_${rep}_1.fastq.gz ${sample_id}_${rep}_2.fastq.gz \
-        --nextera \
-        --length $params.trimgalore_length
+    trim_galore --gzip --fastqc --paired ${sample_id}_${rep}_1.fastq.gz ${sample_id}_${rep}_2.fastq.gz --nextera --length $params.trimgalore_length
     """
 }
