@@ -2,7 +2,6 @@ process create_bed {
     echo true
     label 'create_bed'
     tag 'SAMTOOLS'
-    container 'docker://giusmar/atacseq:0.1.6'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("chr") > 0)           "samtools/bed_files/$filename"
