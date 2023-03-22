@@ -2,6 +2,7 @@ process align {
     echo true
     label 'alignment'
     tag 'BWA'
+    container 'docker://giusmar/atacseq:0.1.6'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("sam") > 0)     "align/mapped/$filename"
