@@ -2,7 +2,7 @@ process index {
     echo true
     label 'index'
     tag 'BWA'
-    container 'docker://giusmar/atacseq:0.1.6'
+    container 'docker://rosadesa/ampliseq:0.2'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
              if (filename.indexOf("fa") > 0)     "BWA/index/$filename"         
