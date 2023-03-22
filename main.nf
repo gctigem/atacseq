@@ -1,12 +1,12 @@
 nextflow.enable.dsl=2
 
 //modules
+include {      index          } from './modules/index'
 include {      fastqc         } from './modules/fastqc'
 include {      trimming       } from './modules/trimming'
 include {      create_bed     } from './modules/create_bed'
 include {      create_tss     } from './modules/create_tss'
-include {      align          } from './modules/align'
-include {      index          } from './modules/index'
+/*include {      align          } from './modules/align'
 include {      samstat        } from './modules/samstat'
 include {      lc_extrap      } from './modules/lc_extrap'
 include {      remove_dups    } from './modules/remove_dups'
@@ -25,7 +25,7 @@ include {      bigwig         } from './modules/bigwig'
 include {      idr_peaks      } from './modules/idr_peaks'
 include {      annotatePeaks  } from './modules/annotatePeaks'
 include {      create_saf     } from './modules/create_saf'
-include {      featurecounts  } from './modules/featurecounts'
+include {      featurecounts  } from './modules/featurecounts' */
 
 // check
 if (params.input)                  { input_ch = file(params.input, checkIfExists: true) }                else { exit 1, 'Input samplesheet not specified!' }
@@ -47,7 +47,7 @@ workflow {
      trimming(inputPairReads)
      create_bed(genomefai_ch,blacklist_ch)
      create_tss(gtf_ch)
-     align(index.out.fasta_index.collect(),trimming.out.fastq)
+     /*align(index.out.fasta_index.collect(),trimming.out.fastq)
      samstat(align.out.mapped)
      lc_extrap(samstat.out.sorted_bam)
      remove_dups(samstat.out.sorted_bam)
@@ -76,6 +76,6 @@ workflow {
      idr_peaks(idr.out.filtered_bed.collect{ it[1] })
      annotatePeaks(idr_peaks.out.homer_bed,fasta_ch,gtf_ch)
      create_saf(idr_peaks.out.homer_bed)  
-     featurecounts(create_saf.out.saf,samstat_tf.out.tf_sorted_bam.collect{ it[2][[0]]})
+     featurecounts(create_saf.out.saf,samstat_tf.out.tf_sorted_bam.collect{ it[2][[0]]}) */
 
 }
