@@ -1,5 +1,4 @@
 process index {
-    container 'docker://rosadesa/ampliseq:0.2'
     echo true
     label 'index'
     tag 'BWA'

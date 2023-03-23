@@ -1,5 +1,4 @@
 process align {
-    container 'docker://rosadesa/ampliseq:0.2'
     echo true
     label 'alignment'
     tag 'BWA'
