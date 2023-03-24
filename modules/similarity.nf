@@ -18,11 +18,11 @@ process similarity {
 
     script:
     """
-    multiBamSummary bins \\
+    singularity exec /home/tigem/s.slovin/singularity/cachedir/atacseq-0.1.6.simg multiBamSummary bins \\
         --bamfiles ${tf_sorted_one[0]} ${tf_sorted_two[0]} \\
         -o ${sample_id}_similarity.npz
 
-    plotCorrelation -in ${sample_id}_similarity.npz --corMethod spearman --labels ${sample_id}_${rep[0]} ${sample_id}_${rep[1]} --skipZeros --whatToPlot heatmap --plotNumbers -o Heatmap_SpearmanCorr_${sample_id}.pdf --outFileCorMatrix SpearmanCorr_mtx_${sample_id}.tab
+    singularity exec /home/tigem/s.slovin/singularity/cachedir/atacseq-0.1.6.simg plotCorrelation -in ${sample_id}_similarity.npz --corMethod spearman --labels ${sample_id}_${rep[0]} ${sample_id}_${rep[1]} --skipZeros --whatToPlot heatmap --plotNumbers -o Heatmap_SpearmanCorr_${sample_id}.pdf --outFileCorMatrix SpearmanCorr_mtx_${sample_id}.tab
     """
 
 }

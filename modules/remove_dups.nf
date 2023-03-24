@@ -18,6 +18,6 @@ process remove_dups {
 
     script:
     """
-    java -jar /picard.jar MarkDuplicates INPUT=${sorted_bam[0]} OUTPUT=${sample_id}_${rep}_sorted_uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_${rep}_MarkDuplicates_metrics.txt VALIDATION_STRINGENCY=LENIENT
+    singularity exec /home/tigem/s.slovin/singularity/cachedir/atacseq-0.1.6.simg java -jar /picard.jar MarkDuplicates INPUT=${sorted_bam[0]} OUTPUT=${sample_id}_${rep}_sorted_uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_${rep}_MarkDuplicates_metrics.txt VALIDATION_STRINGENCY=LENIENT
     """
 }

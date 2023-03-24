@@ -18,7 +18,7 @@ process summary_plot {
 
     script:
     """
-    plot_macs_qc.r -i ${narrowPeak[0]} -s ${sample_id}_${rep[0]}_peaks -p macs_peak.${sample_id}_${rep[0]}
-    plot_macs_qc.r -i ${narrowPeak[1]} -s ${sample_id}_${rep[1]}_peaks -p macs_peak.${sample_id}_${rep[1]}
+    singularity exec /home/tigem/s.slovin/singularity/cachedir/atacseq-0.1.6.simg Rscript /home/tigem/s.slovin/r_scripts/plot_macs_qc.r -i ${narrowPeak[0]} -s ${sample_id}_${rep[0]}_peaks -p macs_peak.${sample_id}_${rep[0]}
+    singularity exec /home/tigem/s.slovin/singularity/cachedir/atacseq-0.1.6.simg Rscript /home/tigem/s.slovin/r_scripts/plot_macs_qc.r -i ${narrowPeak[1]} -s ${sample_id}_${rep[1]}_peaks -p macs_peak.${sample_id}_${rep[1]}
     """
 }

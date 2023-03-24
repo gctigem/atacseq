@@ -1,5 +1,4 @@
 process lc_extrap {
-    container 'docker://clinicalgenomics/preseq:3.1.2'
     echo true
     label 'lc_extrap'
     tag 'PRESEQ'
@@ -17,6 +16,6 @@ process lc_extrap {
 
     script:
     """
-    preseq lc_extrap -bam -pe ${sorted_bam[0]} -output ${sample_id}_${rep}.ccurve.txt -verbose 
+    singularity exec /home/tigem/s.slovin/singularity/cachedir/preseq-3.1.2.simg preseq lc_extrap -bam -pe ${sorted_bam[0]} -output ${sample_id}_${rep}.ccurve.txt -verbose 
     """
 }

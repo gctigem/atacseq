@@ -20,7 +20,7 @@ process peak_calling {
     script:
     READS_IN_PEAKS = "bedtools intersect -a ${tf_sorted_bam} -b ${sample_id}_${rep}_peaks.narrowPeak -bed -c -f 0.20 | awk -F '\t' '{sum += \$NF} END {print sum}'"
     """
-    macs3 callpeak -t ${fragment_bed} -n ${sample_id}_${rep} -f BEDPE
+    singularity exec /home/tigem/s.slovin/singularity/cachedir/atacseq-0.1.6.simg macs3 callpeak -t ${fragment_bed} -n ${sample_id}_${rep} -f BEDPE
     cat ${sample_id}_${rep}_peaks.narrowPeak | wc -l | awk -v OFS='\t' -v name="${sample_id}" '{ print name, \$1 }' | \\
      cat $baseDir/assets/$params.mlib_peak_count_header - > ${sample_id}_${rep}_peaks.count_mqc.tsv
     grep 'mapped (' ${tf_sorted_flagstat[0]} | awk -v a="${READS_IN_PEAKS}" -v OFS='\t' -v name="${sample_id}" '{print name, a/\$1}' | \\
