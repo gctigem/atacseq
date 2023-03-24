@@ -16,6 +16,6 @@ process index {
 
     script:
     """
-    singularity exec /home/tigem/s.slovin/singularity/cachedir/atacseq-0.1.6.simg bwa index $fasta_ch
+    bwa index $fasta_ch
     """
 }

@@ -17,6 +17,6 @@ process align {
 
     script:
     """
-    singularity exec /home/tigem/s.slovin/singularity/cachedir/atacseq-0.1.6.simg bwa mem -M ${fasta} ${reads[0]} ${reads[1]} -o ${sample_id}_${rep}_aligned_reads.sam
+    bwa mem -M ${fasta} ${reads[0]} ${reads[1]} -o ${sample_id}_${rep}_aligned_reads.sam
     """
 }
