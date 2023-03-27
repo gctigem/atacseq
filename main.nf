@@ -8,7 +8,7 @@ include {      create_bed     } from './modules/create_bed'
 include {      create_tss     } from './modules/create_tss'
 include {      align          } from './modules/align'
 include {      samstat        } from './modules/samstat'
-include {      lc_extrap      } from './modules/lc_extrap'
+/*include {      lc_extrap      } from './modules/lc_extrap'
 include {      remove_dups    } from './modules/remove_dups'
 include {      samstat_uniq   } from './modules/samstat_uniq'
 include {      samstat_sf     } from './modules/samstat_sf'
@@ -18,7 +18,7 @@ include {      bamTObedpe     } from './modules/bamTObedpe'
 include {      peak_calling   } from './modules/peak_calling'
 include {      j_coefficient  } from './modules/j_coefficient'
 include {      summary_plot   } from './modules/summary_plot'
-/*include {      idr            } from './modules/idr'
+include {      idr            } from './modules/idr'
 include {      ataqv          } from './modules/ataqv'
 include {      mkarv          } from './modules/mkarv'
 include {      bigwig         } from './modules/bigwig'
@@ -49,7 +49,7 @@ workflow {
      create_tss(gtf_ch)
      align(index.out.fasta_index.collect(),trimming.out.fastq)
      samstat(align.out.mapped)
-     lc_extrap(samstat.out.sorted_bam)
+     /*lc_extrap(samstat.out.sorted_bam)
      remove_dups(samstat.out.sorted_bam)
      samstat_uniq(remove_dups.out.uniq_bam)
      input_sf = remove_dups.out.uniq_bam.combine(samstat_uniq.out.sorted_uniq_bam_bai, by: [0,1])
@@ -67,7 +67,7 @@ workflow {
      input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'true')
      j_coefficient(input_jc)
      summary_plot(input_jc)
-     /*idr(input_jc)
+     idr(input_jc)
      input_av = peak_calling.out.narrowPeak.combine(samstat_tf.out.tf_sorted_bam, by: [0,1])
      ataqv(input_av,create_tss.out.tssbed)
      mkarv(ataqv.out.json.groupTuple(by: [0], sort: 'true'))
