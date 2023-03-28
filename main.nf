@@ -8,8 +8,8 @@ include {      create_bed     } from './modules/create_bed'
 include {      create_tss     } from './modules/create_tss'
 include {      align          } from './modules/align'
 include {      samstat        } from './modules/samstat'
-/*include {      lc_extrap      } from './modules/lc_extrap'
-include {      remove_dups    } from './modules/remove_dups'
+include {      lc_extrap      } from './modules/lc_extrap'
+/*include {      remove_dups    } from './modules/remove_dups'
 include {      samstat_uniq   } from './modules/samstat_uniq'
 include {      samstat_sf     } from './modules/samstat_sf'
 include {      samstat_tf     } from './modules/samstat_tf'
@@ -49,8 +49,8 @@ workflow {
      create_tss(gtf_ch)
      align(index.out.fasta_index.collect(),trimming.out.fastq)
      samstat(align.out.mapped)
-     /*lc_extrap(samstat.out.sorted_bam)
-     remove_dups(samstat.out.sorted_bam)
+     lc_extrap(samstat.out.sorted_bam)
+     /*remove_dups(samstat.out.sorted_bam)
      samstat_uniq(remove_dups.out.uniq_bam)
      input_sf = remove_dups.out.uniq_bam.combine(samstat_uniq.out.sorted_uniq_bam_bai, by: [0,1])
      samstat_sf(input_sf,create_bed.out.regionbed)
