@@ -4,8 +4,8 @@ process samstat {
     tag 'SAMTOOLS'
     publishDir "$params.outdir" , mode: 'copy',
     saveAs: {filename ->
-             if (filename.indexOf("stats") > 0)     "samstat/${rep}/stats/$filename"
-        else if (filename.endsWith("sorted.{bam,bam.bai}"))   "samstat/${rep}/sorted/$filename"
+             if (filename.indexOf("stat") > 0)     "samstat/${rep}/stats/$filename"
+        else if (filename.endsWith(".{bam,bam.bai}"))   "samstat/${rep}/sorted/$filename"
         else null            
     }
 
