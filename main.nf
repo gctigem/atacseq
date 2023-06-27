@@ -11,7 +11,7 @@ include {      remove_dups    } from './modules/remove_dups'
 include {      samstat_uniq   } from './modules/samstat_uniq'
 include {      samstat_sf     } from './modules/samstat_sf'
 include {      samstat_tf     } from './modules/samstat_tf'
-include {      similarity     } from './modules/similarity'
+/*include {      similarity     } from './modules/similarity'
 include {      bamTObedpe     } from './modules/bamTObedpe'
 include {      peak_calling   } from './modules/peak_calling'
 include {      j_coefficient  } from './modules/j_coefficient'
@@ -23,7 +23,7 @@ include {      bigwig         } from './modules/bigwig'
 include {      idr_peaks      } from './modules/idr_peaks'
 include {      annotatePeaks  } from './modules/annotatePeaks'
 include {      create_saf     } from './modules/create_saf'
-include {      featurecounts  } from './modules/featurecounts'
+include {      featurecounts  } from './modules/featurecounts'*/
 
 // check
 if (params.input)                  { input_ch = file(params.input, checkIfExists: true) }                else { exit 1, 'Input samplesheet not specified!' }
@@ -53,7 +53,7 @@ workflow {
      input_sf = remove_dups.out.uniq_bam.combine(samstat_uniq.out.sorted_uniq_bam_bai, by: [0,1])
      samstat_sf(input_sf,create_bed.out.regionbed)
      samstat_tf(samstat_sf.out.sf_sorted_bam)
-     input_sim = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: 'hash')
+     /*input_sim = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: 'hash')
                .map( { name, rep, file -> [sample_id = name, rep = rep, uno = file[0], due = file[1] ] } )
      similarity(input_sim)
      bamTObedpe(samstat_tf.out.tf_sorted_bam)
@@ -74,6 +74,6 @@ workflow {
      idr_peaks(idr.out.filtered_bed.collect{ it[1] })
      annotatePeaks(idr_peaks.out.homer_bed,fasta_ch,gtf_ch)
      create_saf(idr_peaks.out.homer_bed)  
-     featurecounts(create_saf.out.saf,samstat_tf.out.tf_sorted_bam.collect{ it[2][[0]]})
+     featurecounts(create_saf.out.saf,samstat_tf.out.tf_sorted_bam.collect{ it[2][[0]]})*/
 
 }
