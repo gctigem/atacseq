@@ -17,7 +17,8 @@ process remove_dups {
     tuple val(sample_id), val(rep), path("${sample_id}_${rep}_MarkDuplicates_metrics.txt"), emit: uniq_txt
 
     script:
+    def avail_mem = 60000
     """
-    java -jar /picard.jar MarkDuplicates INPUT=${sorted_bam[0]} OUTPUT=${sample_id}_${rep}_sorted_uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_${rep}_MarkDuplicates_metrics.txt VALIDATION_STRINGENCY=LENIENT
+    java -jar /picard.jar MarkDuplicates -Xmx${avail_mem}M INPUT=${sorted_bam[0]} OUTPUT=${sample_id}_${rep}_sorted_uniq.bam ASSUME_SORTED=true REMOVE_DUPLICATES=true METRICS_FILE=${sample_id}_${rep}_MarkDuplicates_metrics.txt VALIDATION_STRINGENCY=LENIENT
     """
 }
