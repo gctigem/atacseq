@@ -1,5 +1,5 @@
 //modules
-include {      fastqc         } from './modules/fastqc'
+/*include {      fastqc         } from './modules/fastqc'
 include {      trimming       } from './modules/trimming'
 include {      create_bed     } from './modules/create_bed'
 include {      create_tss     } from './modules/create_tss'
@@ -10,8 +10,8 @@ include {      lc_extrap      } from './modules/lc_extrap'
 include {      remove_dups    } from './modules/remove_dups'
 include {      samstat_uniq   } from './modules/samstat_uniq'
 include {      samstat_sf     } from './modules/samstat_sf'
-include {      samstat_tf     } from './modules/samstat_tf'
-/*include {      similarity     } from './modules/similarity'
+include {      samstat_tf     } from './modules/samstat_tf'*/
+include {      similarity     } from './modules/similarity'
 include {      bamTObedpe     } from './modules/bamTObedpe'
 include {      peak_calling   } from './modules/peak_calling'
 include {      j_coefficient  } from './modules/j_coefficient'
@@ -23,7 +23,7 @@ include {      bigwig         } from './modules/bigwig'
 include {      idr_peaks      } from './modules/idr_peaks'
 include {      annotatePeaks  } from './modules/annotatePeaks'
 include {      create_saf     } from './modules/create_saf'
-include {      featurecounts  } from './modules/featurecounts'*/
+include {      featurecounts  } from './modules/featurecounts'
 
 // check
 if (params.input)                  { input_ch = file(params.input, checkIfExists: true) }                else { exit 1, 'Input samplesheet not specified!' }
@@ -33,14 +33,18 @@ if (params.fasta)                  { fasta_ch = file(params.fasta, checkIfExists
 if (params.gtf)                    { gtf_ch = file(params.gtf, checkIfExists: true) }                    else { exit 1, 'GTF not specified!' }
 
 //file
-inputPairReads = Channel.fromPath(input_ch)
+tf_sorted_bam = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
-                            .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
+                            .map( { row -> [sample_id = row[0], rep = row[1], bamF = row[2..3]] } )
+
+tf_sorted_flagstat = Channel.fromPath(input_ch)
+                            .splitCsv( header:false, sep:',' )
+                            .map( { row -> [flagstat = row[4]] } )                           
 
 //workflow
 workflow {
 
-     index(fasta_ch)
+     /*index(fasta_ch)
      fastqc(inputPairReads)
      trimming(inputPairReads)
      create_bed(genomefai_ch,blacklist_ch)
@@ -52,14 +56,14 @@ workflow {
      samstat_uniq(remove_dups.out.uniq_bam)
      input_sf = remove_dups.out.uniq_bam.combine(samstat_uniq.out.sorted_uniq_bam_bai, by: [0,1])
      samstat_sf(input_sf,create_bed.out.regionbed)
-     samstat_tf(samstat_sf.out.sf_sorted_bam)
-     /*input_sim = samstat_tf.out.tf_sorted_bam.groupTuple(by: [0], sort: 'hash')
-               .map( { name, rep, file -> [sample_id = name, rep = rep, uno = file[0], due = file[1] ] } )
+     samstat_tf(samstat_sf.out.sf_sorted_bam)*/
+     input_sim = tf_sorted_bam.groupTuple(by: [0], sort: 'hash')
+               .map( { name, rep, file -> [sample_id = name, rep = rep, tf_sorted_one = file[0], tf_sorted_two = file[1] ] } )
      similarity(input_sim)
-     bamTObedpe(samstat_tf.out.tf_sorted_bam)
+     bamTObedpe(tf_sorted_bam)
      input_pc = bamTObedpe.out.fragment_bed.combine(
-          samstat_tf.out.tf_sorted_bam.combine(
-               samstat_tf.out.tf_sorted_flagstat, by: [0,1]),
+          tf_sorted_bam.combine(
+               tf_sorted_flagstat, by: [0,1]),
                                                   by: [0,1])
      peak_calling(input_pc)
      input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'true')
