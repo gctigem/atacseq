@@ -9,6 +9,6 @@ process foo {
 
     script:
     """
-    ls -l
+    head genome.fa
     """
 }

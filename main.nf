@@ -31,19 +31,19 @@ inputPairReads = Channel.fromPath(params.input)
                             .splitCsv( header:false, sep:',' )
                             .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
 
-indexedGenome = Channel.fromPath(params.index).collect() 
+indexedGenome = Channel.fromPath(params.index)
 
 //workflow
 workflow {
 
-     foo(indexedGenome)
+     foo(indexedGenome.collect())
 
      //index(fasta_ch)
      //fastqc(inputPairReads)
      //trimming(inputPairReads)
      //create_bed(genomefai_ch,blacklist_ch)
      //create_tss(gtf_ch)
-     //align(index.out.fasta_index.collect(),trimming.out.fastq)
+     //align(indexedGenome.collect(),trimming.out.fastq)
      //samstat(align.out.mapped)
      //lc_extrap(samstat.out.sorted_bam)
      //remove_dups(samstat.out.sorted_bam)
