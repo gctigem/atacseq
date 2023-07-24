@@ -38,7 +38,7 @@ inputPairReads = Channel.fromPath(params.input)
                             .splitCsv( header:false, sep:',' )
                             .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
 
-indexedGenome = Channel.fromPath(params.index)
+indexedGenome = Channel.from(params.index)
 
 //workflow
 workflow {
