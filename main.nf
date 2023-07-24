@@ -26,14 +26,6 @@ include {      create_saf     } from './modules/create_saf'
 include {      featurecounts  } from './modules/featurecounts'
 include {      foo            } from './modules/foo'
 
-// check
-if (params.input)                  { input_ch = file(params.input, checkIfExists: true) }                else { exit 1, 'Input samplesheet not specified!' }
-if (params.genomefai)              { genomefai_ch = file(params.genomefai, checkIfExists: true) }        else { exit 1, 'Genome fai not specified!' }
-if (params.blacklist)              { blacklist_ch = file(params.blacklist, checkIfExists: true) }        else { exit 1, 'Black list not specified!' }
-if (params.fasta)                  { fasta_ch = file(params.fasta, checkIfExists: true) }                else { exit 1, 'Fasta not specified!' }
-if (params.gtf)                    { gtf_ch = path(params.gtf, checkIfExists: true) }                    else { exit 1, 'GTF not specified!' }
-if (params.index)                  { index_ch = file(params.index, checkIfExists: true) }                else { exit 1, 'GTF not specified!' }
-
 //file
 inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
