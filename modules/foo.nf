@@ -1,4 +1,4 @@
-process trimming {
+process foo {
     echo true
     tag 'foo'
     label 'foo'
