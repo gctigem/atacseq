@@ -43,8 +43,10 @@ indexedGenome = Channel.fromPath(params.index)
 //workflow
 workflow {
 
+     foo(indexedGenome)
+
      //index(fasta_ch)
-     fastqc(inputPairReads)
+     //fastqc(inputPairReads)
      //trimming(inputPairReads)
      //create_bed(genomefai_ch,blacklist_ch)
      //create_tss(gtf_ch)
