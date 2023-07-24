@@ -43,7 +43,7 @@ indexedGenome = Channel.fromPath(params.index)
 //workflow
 workflow {
 
-     foo(indexedGenome)
+     foo(indexedGenome.collect())
 
      //index(fasta_ch)
      //fastqc(inputPairReads)
