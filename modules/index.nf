@@ -9,7 +9,7 @@ process index {
     }
 
     input:
-    path(fasta_ch)
+    file(fasta_ch)
 
     output:
     tuple path("$fasta_ch"), path("$fasta_ch*"), emit: fasta_index
