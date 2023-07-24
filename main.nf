@@ -27,7 +27,7 @@ include {      featurecounts  } from './modules/featurecounts'
 include {      foo            } from './modules/foo'
 
 //file
-inputPairReads = Channel.fromPath(input_ch)
+inputPairReads = Channel.fromPath(params.input)
                             .splitCsv( header:false, sep:',' )
                             .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
 
