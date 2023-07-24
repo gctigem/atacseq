@@ -1,5 +1,5 @@
 process foo {
-    echo true
+    debug true
     tag 'foo'
     label 'foo'
     publishDir "$params.outdir" , mode: 'copy'
