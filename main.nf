@@ -26,8 +26,15 @@ include {      create_saf     } from './modules/create_saf'
 include {      featurecounts  } from './modules/featurecounts'
 include {      foo            } from './modules/foo'
 
+// check
+if (params.input)                  { input_ch = file(params.input, checkIfExists: true) }                else { exit 1, 'Input samplesheet not specified!' }
+if (params.genomefai)              { genomefai_ch = file(params.genomefai, checkIfExists: true) }        else { exit 1, 'Genome fai not specified!' }
+if (params.blacklist)              { blacklist_ch = file(params.blacklist, checkIfExists: true) }        else { exit 1, 'Black list not specified!' }
+if (params.fasta)                  { fasta_ch = file(params.fasta, checkIfExists: true) }                else { exit 1, 'Fasta not specified!' }
+if (params.gtf)                    { gtf_ch = file(params.gtf, checkIfExists: true) }                    else { exit 1, 'GTF not specified!' }
+
 //file
-inputPairReads = Channel.fromPath(params.input)
+inputPairReads = Channel.fromPath(input_ch)
                             .splitCsv( header:false, sep:',' )
                             .map( { row -> [sample_id = row[0], rep = row[1], read = row[2..3]] } )
 
@@ -36,14 +43,12 @@ indexedGenome = Channel.fromPath(params.index)
 //workflow
 workflow {
 
-     foo(indexedGenome.collect())
-
      //index(fasta_ch)
-     //fastqc(inputPairReads)
-     //trimming(inputPairReads)
-     //create_bed(genomefai_ch,blacklist_ch)
-     //create_tss(gtf_ch)
-     //align(indexedGenome.collect(),trimming.out.fastq)
+     fastqc(inputPairReads)
+     trimming(inputPairReads)
+     create_bed(genomefai_ch,blacklist_ch)
+     create_tss(gtf_ch)
+     align(indexedGenome.collect(),trimming.out.fastq)
      //samstat(align.out.mapped)
      //lc_extrap(samstat.out.sorted_bam)
      //remove_dups(samstat.out.sorted_bam)
