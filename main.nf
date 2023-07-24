@@ -43,7 +43,7 @@ indexedGenome = Channel.from(params.index)
 //workflow
 workflow {
 
-     indexedGenome.view()
+     indexedGenome.collect().view()
      //foo(indexedGenome.collect())
 
      //index(fasta_ch)
