@@ -15,7 +15,7 @@ include {      similarity     } from './modules/similarity'
 include {      bamTObedpe     } from './modules/bamTObedpe'
 include {      peak_calling   } from './modules/peak_calling'
 include {      j_coefficient  } from './modules/j_coefficient'
-include {      summary_plot   } from './modules/summary_plot'
+/*include {      summary_plot   } from './modules/summary_plot'*/
 include {      idr            } from './modules/idr'
 include {      ataqv          } from './modules/ataqv'
 include {      mkarv          } from './modules/mkarv'
@@ -64,7 +64,7 @@ workflow {
      peak_calling(input_pc)
      input_jc = peak_calling.out.narrowPeak.groupTuple(by :[0], sort: 'true')
      j_coefficient(input_jc)
-     summary_plot(input_jc)
+     /*summary_plot(input_jc)*/
      idr(input_jc)
      input_av = peak_calling.out.narrowPeak.combine(samstat_tf.out.tf_sorted_bam, by: [0,1])
      ataqv(input_av,create_tss.out.tssbed)
