@@ -18,7 +18,7 @@ process annotatePeaks {
 
     script:
     """
-    annotatePeaks.pl ${homer_bed} ${fasta} -gid -gtf ${gtf} > annotatePeaks_homer_names_160_IDR_peaks.txt
+    perl annotatePeaks.pl ${homer_bed} ${fasta} -gid -gtf ${gtf} > annotatePeaks_homer_names_160_IDR_peaks.txt
     """
 
 }
